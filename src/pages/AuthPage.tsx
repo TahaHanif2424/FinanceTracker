@@ -35,23 +35,68 @@ export default function AuthPage() {
     );
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-career-lightGray">
-      {/* Decorative subtle circles with theme colors */}
-      <div className="absolute top-16 left-16 w-64 h-64 bg-career-mediumGreen rounded-full filter blur-3xl opacity-20"></div>
-      <div className="absolute bottom-16 right-16 w-80 h-80 bg-career-darkGreen rounded-full filter blur-3xl opacity-20"></div>
+    <div className="w-screen h-screen flex bg-white">
+      {/* Left Half - Welcome Section */}
+      <div className="w-1/2 bg-gradient-to-br from-career-darkGreen to-career-mediumGreen flex flex-col items-center justify-center text-white p-12 relative overflow-hidden">
+        {/* Decorative circles */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full filter blur-3xl opacity-10"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full filter blur-3xl opacity-10"></div>
 
-      {/* Auth card */}
-      <div className="flex flex-col w-full max-w-md">
-        <div className="flex items-center justify-center mb-2">
-          <img src="/logo-bg.png" alt="Future Connect" className="w-16 h-16 mr-2" />
-          <h1 className="text-lg font-semibold text-career-darkGreen">
-            Future Connect
-          </h1>
+        {/* Content */}
+        <div className="relative z-10 max-w-lg">
+          <div className="flex items-center mb-8">
+            <img src="/logo-bg.png" alt="Finance Tracker" className="w-20 h-20 mr-4" />
+            <h1 className="text-4xl font-bold">Finance Tracker</h1>
+          </div>
+
+          <h2 className="text-3xl font-semibold mb-6">
+            Take Control of Your Financial Future
+          </h2>
+
+          <p className="text-lg mb-6 opacity-90">
+            Track expenses, manage budgets, and achieve your financial goals with our comprehensive finance management platform.
+          </p>
+
+          <div className="space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <span className="text-xl">💰</span>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Smart Budgeting</h3>
+                <p className="opacity-80">Create and monitor budgets that adapt to your spending habits</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <span className="text-xl">📊</span>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Visual Reports</h3>
+                <p className="opacity-80">Gain insights with beautiful charts and detailed analytics</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <span className="text-xl">🎯</span>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Goal Tracking</h3>
+                <p className="opacity-80">Set financial goals and track your progress in real-time</p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="relative z-10">{componentRender}</div>
       </div>
 
+      {/* Right Half - Auth Form */}
+      <div className="w-1/2 flex items-center justify-center bg-career-lightGray p-12">
+        <div className="w-full max-w-md">
+          {componentRender}
+        </div>
+      </div>
     </div>
   );
 }

@@ -11,4 +11,4 @@ export const sidebar_item=[
 // Header height calculation: py-1 (0.25rem * 2 = 0.5rem = 8px) + h-20 logo (5rem = 80px) + border (1px) = 89px
 export const HEADER_HEIGHT = 89; // in pixels
 // Dashboard padding: p-6 (1.5rem * 2 = 3rem = 48px)
-export const CONTENT_HEIGHT = `calc(100vh - ${HEADER_HEIGHT}px - 24px)`;
+export const CONTENT_HEIGHT = `calc(100vh - ${HEADER_HEIGHT}px)`;
