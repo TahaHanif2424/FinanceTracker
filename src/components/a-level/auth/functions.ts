@@ -11,6 +11,7 @@ export const signup = async (signupdata: signupdata) => {
         throw new Error("Password does not match");
     }
     try {
+        console.log("Sending signup request with data:", signupdata);
         const response = await axiosInstance.post("/auth/signup", {
             email: signupdata.email,
             name: signupdata.name,
@@ -18,7 +19,8 @@ export const signup = async (signupdata: signupdata) => {
             confirmPassword: signupdata.confirmPassword,
         });
         if(response.data){
-            return true;
+            console.log("Signup response data:", response.data);
+            return response.data;
         }else{
             return false;
         }

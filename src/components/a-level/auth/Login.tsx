@@ -62,6 +62,7 @@ export default function Login({ changeMode }: AuthProp) {
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
               <Input
                 type="email"
+                name="email"
                 className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
                   errors.email && touched.email
                     ? "border-red-400 bg-red-50 focus:border-red-500"
@@ -70,6 +71,7 @@ export default function Login({ changeMode }: AuthProp) {
                 placeholder="you@example.com"
                 value={values.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
             {errors.email && touched.email && (
@@ -86,6 +88,7 @@ export default function Login({ changeMode }: AuthProp) {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
               <Input
                 type="password"
+                name="password"
                 className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
                   errors.password && touched.password
                     ? "border-red-400 bg-red-50 focus:border-red-500"
@@ -94,6 +97,7 @@ export default function Login({ changeMode }: AuthProp) {
                 placeholder="Enter your password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
             {errors.password && touched.password && (
@@ -127,7 +131,7 @@ export default function Login({ changeMode }: AuthProp) {
             Don't have an account?{" "}
             <p
               onClick={changeMode}
-              className="font-semibold text-career-darkGreen hover:underline"
+              className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
             >
               Create Account 
             </p>

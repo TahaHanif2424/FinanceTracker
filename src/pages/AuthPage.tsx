@@ -42,15 +42,16 @@ export default function AuthPage() {
 
       {/* Auth card */}
       <div className="flex flex-col w-full max-w-md">
-        <div className="flex items-center mb-2">
-          <img src="/logo-bg.png" alt="Future Connect" className="w-16 h-16" />
-          <h1 className="text-lg font-semibold text-career-darkGreen ml-2">
+        <div className="flex items-center justify-center mb-2">
+          <img src="/logo-bg.png" alt="Future Connect" className="w-16 h-16 mr-2" />
+          <h1 className="text-lg font-semibold text-career-darkGreen">
             Future Connect
           </h1>
         </div>
 
         <div className="relative z-10">{componentRender}</div>
       </div>
+
     </div>
   );
 }

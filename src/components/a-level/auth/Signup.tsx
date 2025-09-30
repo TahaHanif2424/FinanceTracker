@@ -36,7 +36,7 @@ export default function Signup({ changeMode }: AuthProp) {
                 name: values.name,
               })
             );
-            navigate("/dashboard");
+            navigate("/auth?mode=login");
           }
         } catch (error) {
           console.error("Signup failed:", error);
@@ -63,9 +63,11 @@ export default function Signup({ changeMode }: AuthProp) {
             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
             <Input
               type="text"
+              name="name"
               placeholder="John Doe"
               value={values.name}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="pl-10"
             />
           </div>
@@ -83,9 +85,11 @@ export default function Signup({ changeMode }: AuthProp) {
             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
             <Input
               type="email"
+              name="email"
               placeholder="you@example.com"
               value={values.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="pl-10"
             />
           </div>
@@ -103,9 +107,11 @@ export default function Signup({ changeMode }: AuthProp) {
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
             <Input
               type="password"
+              name="password"
               placeholder="Enter your password"
               value={values.password}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="pl-10"
             />
           </div>
@@ -123,9 +129,11 @@ export default function Signup({ changeMode }: AuthProp) {
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
             <Input
               type="password"
+              name="confirmPassword"
               placeholder="Re-enter your password"
               value={values.confirmPassword}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="pl-10"
             />
           </div>
@@ -158,7 +166,7 @@ export default function Signup({ changeMode }: AuthProp) {
           Already have an account?{" "}
           <p
             onClick={changeMode}
-            className="font-semibold text-career-darkGreen hover:underline"
+            className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
           >
             Sign In
           </p>
