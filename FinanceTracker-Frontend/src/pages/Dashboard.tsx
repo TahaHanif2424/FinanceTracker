@@ -7,9 +7,9 @@ import { CONTENT_HEIGHT } from '../utils/constants';
 
 export default function Dashboard() {
   return (
-    <div className="p-6 flex flex-col gap-6" style={{ height: CONTENT_HEIGHT }}>
+    <div className="p-6 flex flex-col gap-6 bg-gray-50" style={{ height: CONTENT_HEIGHT }}>
       {/* First Row */}
-      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden">
+      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden pb-2">
         {/* Amount Items Column */}
         <div className="grid grid-rows-3 gap-6 min-h-0 h-full">
           <AmountItem
@@ -40,7 +40,7 @@ export default function Dashboard() {
         {/* Charts Column */}
         <div className="grid grid-rows-2 gap-6 min-h-0 h-full">
           {/* Line Chart */}
-          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0">
+          <div className="bg-white rounded-xl shadow-md p-3 flex flex-col min-h-0 border border-career-lightGray/20">
             <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Range of expense</h2>
             <div className="flex-1 min-h-0">
               <ExpenseLineChart />
@@ -48,7 +48,7 @@ export default function Dashboard() {
           </div>
 
           {/* Bar Chart */}
-          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0">
+          <div className="bg-white rounded-xl shadow-md p-3 flex flex-col min-h-0 border border-career-lightGray/20">
             <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Last week Expense</h2>
             <div className="flex-1 min-h-0">
               <ExpenseBarChart />
@@ -58,7 +58,7 @@ export default function Dashboard() {
       </div>
 
       {/* Second Row */}
-      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden">
+      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden pb-4">
         {/* Additional Amount Items Column */}
         <div className="grid grid-rows-2 gap-6 min-h-0 h-full">
           <AmountItem
@@ -79,7 +79,7 @@ export default function Dashboard() {
         </div>
 
         {/* Pie Chart */}
-        <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0 h-full">
+        <div className="bg-white rounded-xl shadow-md p-3 flex flex-col min-h-0 h-full border border-career-lightGray/20">
           <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Expense Categories</h2>
           <div className="flex-1 min-h-0">
             <ExpensePieChart />
