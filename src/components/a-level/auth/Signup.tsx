@@ -47,130 +47,151 @@ export default function Signup({ changeMode }: AuthProp) {
     });
 
   return (
-    <div className="bg-white px-10 py-8 rounded-2xl shadow-xl w-full max-w-md border border-career-lightGray">
-      {/* Header */}
-      
-      <h2 className="text-lg font-semibold text-center text-career-darkGreen mb-6">Sign Up</h2>
+    <div className="relative bg-white backdrop-blur-md p-12 rounded-3xl shadow-2xl w-full max-w-lg border border-career-lightGray animate-fade-in">
+      {/* gradient background overlay */}
 
-      {/* Form */}
-      <form className="space-y-2" onSubmit={handleSubmit}>
-        {/* Name */}
-        <div>
-          <label className="block text-sm font-medium text-career-darkGreen mb-2">
-            Full Name
-          </label>
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
-            <Input
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="pl-10"
-            />
-          </div>
-          {errors.name && touched.name && (
-            <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-          )}
-        </div>
+      <div className="relative z-10">
+        {/* header */}
+        <h2 className="text-xl font-semibold text-center text-career-darkGreen mb-8">Sign Up</h2>
 
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-medium text-career-darkGreen mb-2">
-            Email Address
-          </label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
-            <Input
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="pl-10"
-            />
-          </div>
-          {errors.email && touched.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-          )}
-        </div>
-
-        {/* Password */}
-        <div>
-          <label className="block text-sm font-medium text-career-darkGreen mb-2">
-            Password
-          </label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
-            <Input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="pl-10"
-            />
-          </div>
-          {errors.password && touched.password && (
-            <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-          )}
-        </div>
-
-        {/* Confirm Password */}
-        <div>
-          <label className="block text-sm font-medium text-career-darkGreen mb-2">
-            Confirm Password
-          </label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
-            <Input
-              type="password"
-              name="confirmPassword"
-              placeholder="Re-enter your password"
-              value={values.confirmPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="pl-10"
-            />
-          </div>
-          {errors.confirmPassword && touched.confirmPassword && (
-            <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>
-          )}
-        </div>
-
-        {/* Submit Button */}
-        <div className="pt-2">
-          <Button mode="simple" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Loader2 className="animate-spin w-5 h-5" />
-                Creating Account...
-              </>
-            ) : (
-              <>
-                <UserPlus className="w-5 h-5" />
-                Sign Up
-              </>
+        {/* form */}
+        <form className="space-y-2" onSubmit={handleSubmit}>
+          {/* name */}
+          <div>
+            <label className="block text-career-darkGreen font-medium mb-2 text-base">
+              Full Name
+            </label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
+              <Input
+                type="text"
+                name="name"
+                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
+                  errors.name && touched.name
+                    ? "border-red-400 bg-red-50 focus:border-red-500"
+                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
+                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
+                placeholder="John Doe"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.name && touched.name && (
+              <p className="text-red-500 text-sm mt-2">{errors.name}</p>
             )}
-          </Button>
-        </div>
-      </form>
+          </div>
 
-      {/* Footer */}
-      <div className="mt-6 text-center flex justify-center">
-        <p className="text-sm text-career-mediumGreen flex">
-          Already have an account?{" "}
-          <p
-            onClick={changeMode}
-            className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
-          >
-            Sign In
+          {/* email */}
+          <div>
+            <label className="block text-career-darkGreen font-medium mb-2 text-base">
+              Email Address
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
+              <Input
+                type="email"
+                name="email"
+                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
+                  errors.email && touched.email
+                    ? "border-red-400 bg-red-50 focus:border-red-500"
+                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
+                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
+                placeholder="you@example.com"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.email && touched.email && (
+              <p className="text-red-500 text-sm mt-2">{errors.email}</p>
+            )}
+          </div>
+
+          {/* password */}
+          <div>
+            <label className="block text-career-darkGreen font-medium mb-2 text-base">
+              Password
+            </label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
+              <Input
+                type="password"
+                name="password"
+                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
+                  errors.password && touched.password
+                    ? "border-red-400 bg-red-50 focus:border-red-500"
+                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
+                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
+                placeholder="Enter your password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.password && touched.password && (
+              <p className="text-red-500 text-sm mt-2">{errors.password}</p>
+            )}
+          </div>
+
+          {/* confirm password */}
+          <div>
+            <label className="block text-career-darkGreen font-medium mb-2 text-base">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5" />
+              <Input
+                type="password"
+                name="confirmPassword"
+                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "border-red-400 bg-red-50 focus:border-red-500"
+                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
+                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
+                placeholder="Re-enter your password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.confirmPassword && touched.confirmPassword && (
+              <p className="text-red-500 text-sm mt-2">{errors.confirmPassword}</p>
+            )}
+          </div>
+
+          {/* button */}
+          <div className="mt-6">
+            <Button
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                <>
+                  <UserPlus className="w-5 h-5" />
+                  Sign Up
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+
+        {/* footer */}
+        <div className="mt-8 text-center flex justify-center">
+          <p className="text-career-mediumGreen text-base flex">
+            Already have an account?{" "}
+            <p
+              onClick={changeMode}
+              className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
+            >
+              Sign In
+            </p>
           </p>
-        </p>
+        </div>
       </div>
     </div>
   );
