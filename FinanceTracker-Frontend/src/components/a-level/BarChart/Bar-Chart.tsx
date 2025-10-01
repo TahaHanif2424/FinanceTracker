@@ -38,10 +38,6 @@ export default function ExpenseBarChart() {
             itemStyle={{ color: '#5E8C61' }}
             cursor={{ fill: 'rgba(15, 76, 92, 0.05)' }}
           />
-          <Legend
-            wrapperStyle={{ color: '#0F4C5C', fontSize: '14px', fontWeight: '500' }}
-            iconType="circle"
-          />
           <Bar
             dataKey="expenses"
             fill="#0F4C5C"

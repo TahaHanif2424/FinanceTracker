@@ -2,13 +2,16 @@ import React from 'react';
 import AmountItem from '../components/b-level/Amount-item';
 import ExpenseBarChart from '../components/a-level/BarChart/Bar-Chart';
 import ExpenseLineChart from '../components/a-level/LineChart/Line-Chart';
+import ExpensePieChart from '../components/a-level/PieChart/Pie-Chart';
 import { CONTENT_HEIGHT } from '../utils/constants';
 
 export default function Dashboard() {
   return (
-    <div className="flex gap-6 p-6" style={{ height: CONTENT_HEIGHT }}>
-      {/* Amount Items Container */}
-      <div className="flex flex-col gap-6 flex-shrink-0 h-full justify-between">
+    <div className="p-6">
+      {/* First Row */}
+      <div className="grid grid-cols-[auto_1fr] gap-6" style={{ height: CONTENT_HEIGHT }}>
+        {/* Amount Items Column */}
+        <div className="grid grid-rows-3 gap-6">
           <AmountItem
             heading="Total Balance"
             amount={45230}
@@ -34,19 +37,53 @@ export default function Dashboard() {
           />
         </div>
 
-      {/* Line Chart Container */}
-      <div className="bg-white rounded-xl shadow-sm p-6 flex-1 flex flex-col" style={{ maxHeight: '400px' }}>
-        <h2 className="text-xl font-semibold text-career-darkGreen mb-4">Expense Trends</h2>
-        <div className="flex-1 min-h-0">
-          <ExpenseLineChart />
+        {/* Charts Column */}
+        <div className="grid grid-rows-2 gap-6">
+          {/* Line Chart */}
+          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+            <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Range of expense</h2>
+            <div className="flex-1 min-h-0">
+              <ExpenseLineChart />
+            </div>
+          </div>
+
+          {/* Bar Chart */}
+          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+            <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Last week Expense</h2>
+            <div className="flex-1 min-h-0">
+              <ExpenseBarChart />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bar Chart Container */}
-      <div className="bg-white rounded-xl shadow-sm p-6 flex-1 flex flex-col" style={{ maxHeight: '400px' }}>
-        <h2 className="text-xl font-semibold text-career-darkGreen mb-4">Weekly Expenses</h2>
-        <div className="flex-1 min-h-0">
-          <ExpenseBarChart />
+      {/* Second Row */}
+      <div className="grid grid-cols-[auto_1fr] gap-6 mt-6" style={{ height: CONTENT_HEIGHT }}>
+        {/* Additional Amount Items Column */}
+        <div className="grid grid-rows-2 gap-6">
+          <AmountItem
+            heading="Savings Goal"
+            amount={15000}
+            icon="🎯"
+            trend="up"
+            trendPercentage={10.0}
+          />
+
+          <AmountItem
+            heading="Investments"
+            amount={25000}
+            icon="📈"
+            trend="up"
+            trendPercentage={15.2}
+          />
+        </div>
+
+        {/* Pie Chart */}
+        <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+          <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Expense Categories</h2>
+          <div className="flex-1 min-h-0">
+            <ExpensePieChart />
+          </div>
         </div>
       </div>
     </div>

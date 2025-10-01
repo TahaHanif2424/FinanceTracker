@@ -51,17 +51,7 @@ const options = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      display: true,
-      position: 'top' as const,
-      labels: {
-        color: '#0F4C5C',
-        font: {
-          size: 14,
-          weight: '500' as const,
-        },
-        usePointStyle: true,
-        pointStyle: 'circle',
-      },
+      display: false,
     },
     tooltip: {
       backgroundColor: '#fff',
