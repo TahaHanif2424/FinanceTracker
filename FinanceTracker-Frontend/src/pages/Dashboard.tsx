@@ -7,11 +7,11 @@ import { CONTENT_HEIGHT } from '../utils/constants';
 
 export default function Dashboard() {
   return (
-    <div className="p-6">
+    <div className="p-6 flex flex-col gap-6" style={{ height: CONTENT_HEIGHT }}>
       {/* First Row */}
-      <div className="grid grid-cols-[auto_1fr] gap-6" style={{ height: CONTENT_HEIGHT }}>
+      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden">
         {/* Amount Items Column */}
-        <div className="grid grid-rows-3 gap-6">
+        <div className="grid grid-rows-3 gap-6 min-h-0 h-full">
           <AmountItem
             heading="Total Balance"
             amount={45230}
@@ -38,9 +38,9 @@ export default function Dashboard() {
         </div>
 
         {/* Charts Column */}
-        <div className="grid grid-rows-2 gap-6">
+        <div className="grid grid-rows-2 gap-6 min-h-0 h-full">
           {/* Line Chart */}
-          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0">
             <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Range of expense</h2>
             <div className="flex-1 min-h-0">
               <ExpenseLineChart />
@@ -48,7 +48,7 @@ export default function Dashboard() {
           </div>
 
           {/* Bar Chart */}
-          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+          <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0">
             <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Last week Expense</h2>
             <div className="flex-1 min-h-0">
               <ExpenseBarChart />
@@ -58,9 +58,9 @@ export default function Dashboard() {
       </div>
 
       {/* Second Row */}
-      <div className="grid grid-cols-[auto_1fr] gap-6 mt-6" style={{ height: CONTENT_HEIGHT }}>
+      <div className="grid grid-cols-[auto_1fr] gap-6 min-h-0 h-full shrink-0 overflow-hidden">
         {/* Additional Amount Items Column */}
-        <div className="grid grid-rows-2 gap-6">
+        <div className="grid grid-rows-2 gap-6 min-h-0 h-full">
           <AmountItem
             heading="Savings Goal"
             amount={15000}
@@ -79,7 +79,7 @@ export default function Dashboard() {
         </div>
 
         {/* Pie Chart */}
-        <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col">
+        <div className="bg-white rounded-xl shadow-sm p-3 flex flex-col min-h-0 h-full">
           <h2 className="text-xl font-semibold text-career-darkGreen mb-1">Expense Categories</h2>
           <div className="flex-1 min-h-0">
             <ExpensePieChart />
