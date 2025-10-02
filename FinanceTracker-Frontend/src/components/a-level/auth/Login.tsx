@@ -129,12 +129,12 @@ export default function Login({ changeMode }: AuthProp) {
         <div className="mt-8 text-center flex justify-center">
           <p className="text-career-mediumGreen text-base flex">
             Don't have an account?{" "}
-            <p
+            <span
               onClick={changeMode}
               className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
             >
-              Create Account 
-            </p>
+              Create Account
+            </span>
           </p>
         </div>
       </div>

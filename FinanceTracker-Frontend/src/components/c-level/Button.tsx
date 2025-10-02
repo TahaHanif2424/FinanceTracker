@@ -3,6 +3,7 @@ type ButtonProps = {
   className?: string;
   mode?: "simple" | "dead";
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
   children: React.ReactNode;
 };
 
@@ -11,17 +12,18 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   mode = "simple",
   disabled = false,
+  type = "button",
   children,
 }) => {
   const baseClasses = `
-    text-white 
-    px-6 py-3 
-    rounded-2xl 
-    font-semibold 
-    shadow-md 
-    transition 
-    duration-300 
-    ease-in-out 
+    text-white
+    px-6 py-3
+    rounded-2xl
+    font-semibold
+    shadow-md
+    transition
+    duration-300
+    ease-in-out
     flex items-center justify-center gap-2
   `;
 
@@ -32,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       className={`${baseClasses} ${modeClasses} ${className}`}
       onClick={onClick}
       disabled={disabled || mode === "dead"}

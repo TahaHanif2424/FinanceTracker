@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/a-level/sidebar/sidebar';
 import Header from '../components/b-level/header/header';
+import Dialog from '../components/a-level/Dialog';
 
 export default function AuthenticatedLayout() {
   return (
@@ -16,6 +17,9 @@ export default function AuthenticatedLayout() {
           <Outlet />
         </main>
       </div>
+
+      {/* Dialog Manager */}
+      <Dialog />
     </div>
   );
 }

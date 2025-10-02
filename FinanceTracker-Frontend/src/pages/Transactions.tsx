@@ -1,6 +1,8 @@
 import React from 'react';
 import TransactionContainer from '../components/a-level/Transaction-container';
 import { CONTENT_HEIGHT } from '../utils/constants';
+import Button from '../components/c-level/Button';
+import { useDialogStore } from '../Store/DialogStore';
 
 // Sample transaction data
 const sampleTransactions = [
@@ -52,11 +54,19 @@ const sampleTransactions = [
 ];
 
 export default function Transactions() {
+  const { openDialog } = useDialogStore();
+
   return (
     <div className="p-6 bg-gray-50" style={{ height: CONTENT_HEIGHT }}>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-career-darkGreen">Transactions</h1>
-        <p className="text-gray-600 mt-1">View and manage your transaction history</p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-career-darkGreen">Transactions</h1>
+          <p className="text-gray-600 mt-1">View and manage your transaction history</p>
+        </div>
+        <Button onClick={() => openDialog('add_transaction')}>
+          <span className="text-xl">+</span>
+          Add Transaction
+        </Button>
       </div>
 
       <TransactionContainer
