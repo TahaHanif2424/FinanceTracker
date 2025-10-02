@@ -8,28 +8,31 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
-@Entity
-@Table(name = "groups")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Groups {
+@Data
+@Entity
+public class Friends {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
-    private User admin;
+    @JoinColumn(name = "user1_id", nullable = false)
+    private User user1;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "user2_id", nullable = false)
+    private User user2;
+
+    @Enumerated(EnumType.STRING)
+    private FriendshipStatus status;
+
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
-    @OneToMany(mappedBy = "group")
-    private List<UserGroupRelation> userRelations;
 }
+

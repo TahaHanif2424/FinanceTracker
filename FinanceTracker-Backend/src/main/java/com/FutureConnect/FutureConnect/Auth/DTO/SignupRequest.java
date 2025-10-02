@@ -1,4 +1,4 @@
-package com.FutureConnect.FutureConnect.Auth;
+package com.FutureConnect.FutureConnect.Auth.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

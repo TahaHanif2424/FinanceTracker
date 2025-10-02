@@ -23,6 +23,10 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @Column(columnDefinition = "integer default 0")
+    private Integer monthlyIncome = 0;
+
     private boolean isVerified;
     @OneToMany(mappedBy = "user")
     private List<UserGroupRelation> groupRelations;

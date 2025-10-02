@@ -9,27 +9,35 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
-@Table(name = "groups")
+@Table(name = "group_expenses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Groups {
+public class GroupExpense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
-    private User admin;
+    @JoinColumn(name = "group_id", nullable = false)
+    private Groups group;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "paid_by_user_id", nullable = false)
+    private User paidBy;
+
+    private int amount;
+    private String description;
+    private String category;
+
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
-    @OneToMany(mappedBy = "group")
-    private List<UserGroupRelation> userRelations;
+
+    @OneToMany(mappedBy = "groupExpense", cascade = CascadeType.ALL)
+    private List<ExpenseSplit> splits;
 }
