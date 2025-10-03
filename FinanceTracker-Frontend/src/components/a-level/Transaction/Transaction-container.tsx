@@ -3,6 +3,7 @@ import TransactionItem from '../../b-level/Transaction-item';
 import useTransaction from './usetransactions';
 import { getCategoryIcon } from '../../../utils/categoryIcons';
 import type { Transaction as APITransaction } from './types';
+import Loader from '../../c-level/Loader';
 
 type Transaction = {
   id: string;
@@ -66,16 +67,13 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
           <h2 className="text-xl font-semibold text-career-darkGreen">
             Recent Transactions
           </h2>
-          <button className="text-sm text-career-darkGreen hover:underline">
-            View All
-          </button>
         </div>
       )}
 
       <div className="flex-1 overflow-y-auto space-y-3">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <p className="text-gray-500 text-sm">Loading...</p>
+            <Loader size="md" text="Loading transactions..." />
           </div>
         ) : transactions.length > 0 ? (
           transactions.map((transaction: Transaction) => (
