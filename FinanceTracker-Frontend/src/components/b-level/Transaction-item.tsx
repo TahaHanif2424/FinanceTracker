@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDialogStore } from '../../Store/DialogStore';
 
 type TransactionItemProps = {
   name: string;
@@ -8,6 +9,8 @@ type TransactionItemProps = {
   type?: 'INCOME' | 'EXPENSE';
   icon?: React.ReactNode;
   className?: string;
+  description?: string;
+  fullDate?: string;
 };
 
 const TransactionItem: React.FC<TransactionItemProps> = ({
@@ -18,9 +21,20 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   type = 'EXPENSE',
   icon,
   className = '',
+  description = '',
+  fullDate,
 }) => {
   const isExpense = type === 'EXPENSE';
-
+  const dialog=useDialogStore();
+  const open=()=>{
+    dialog.openDialog('transaction_detail', {
+      amount,
+      type,
+      category: name,
+      date: fullDate || date,
+      description: description || '',
+    })
+  }
   return (
     <div
       className={`
@@ -36,8 +50,10 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         items-center
         justify-between
         gap-4
+        cursor-pointer
         ${className}
       `}
+        onClick={() => {open()}}
     >
       {/* Left: Icon */}
       <div className="flex-shrink-0">

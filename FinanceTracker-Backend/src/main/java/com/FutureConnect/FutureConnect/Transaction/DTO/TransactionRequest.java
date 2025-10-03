@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -16,6 +16,6 @@ public class TransactionRequest {
     private TransactionType type;
     private String category;
     private int amount;
-    private Date date;
+    private LocalDateTime date;
     private String description;
 }

@@ -4,6 +4,7 @@ import useTransaction from './usetransactions';
 import { getCategoryIcon } from '../../../utils/categoryIcons';
 import type { Transaction as APITransaction } from './types';
 import Loader from '../../c-level/Loader';
+import SectionHeader from '../../c-level/SectionHeader';
 
 type Transaction = {
   id: string;
@@ -13,6 +14,8 @@ type Transaction = {
   amount: number;
   type: 'INCOME' | 'EXPENSE';
   icon?: React.ReactNode;
+  description?: string;
+  fullDate: string;
 };
 
 type TransactionContainerProps = {
@@ -46,6 +49,8 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
       amount: transaction.amount,
       type: transaction.type,
       icon: getCategoryIcon(transaction.category),
+      description: transaction.description,
+      fullDate: transaction.date,
     };
   });
 
@@ -63,11 +68,10 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
       `}
     >
       {showHeader && (
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-career-darkGreen">
-            Recent Transactions
-          </h2>
-        </div>
+        <SectionHeader
+          title="Recent Transactions"
+          subtitle="Transactions for last 10 days"
+        />
       )}
 
       <div className="flex-1 overflow-y-auto space-y-3">
@@ -85,6 +89,8 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
               name={transaction.name}
               time={transaction.time}
               type={transaction.type}
+              description={transaction.description}
+              fullDate={transaction.fullDate}
             />
           ))
         ) : (

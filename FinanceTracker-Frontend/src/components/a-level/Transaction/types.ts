@@ -1,5 +1,5 @@
 export type Transaction={
-    userId:string,
+    userId?:string,
     amount: number,
     type: 'INCOME' | 'EXPENSE',
     category: string,

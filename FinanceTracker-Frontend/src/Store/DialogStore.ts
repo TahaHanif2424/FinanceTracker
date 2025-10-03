@@ -2,10 +2,10 @@ import { create } from "zustand"
 
 interface DialogState {
   isOpen: boolean;
-  dialogName: string | null; 
-  dialogData?: unknown;           
+  dialogName: string | null;
+  dialogData?: any;
 
-  openDialog: (name: string, data?: unknown) => void;
+  openDialog: (name: string, data?: any) => void;
   closeDialog: () => void;
 }
 
@@ -14,7 +14,7 @@ export const useDialogStore = create<DialogState>((set) => ({
   dialogName: null,
   dialogData: undefined,
 
-  openDialog: (name, data = {}) => set({
+  openDialog: (name, data) => set({
     isOpen: true,
     dialogName: name,
     dialogData: data,

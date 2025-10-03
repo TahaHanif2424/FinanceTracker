@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -29,8 +29,8 @@ public class Transaction {
     private String category;
     private int amount;
 
-    @CreationTimestamp
-    private Date date;
+//    @CreationTimestamp
+    private LocalDateTime date;
 
     private String description;
 }

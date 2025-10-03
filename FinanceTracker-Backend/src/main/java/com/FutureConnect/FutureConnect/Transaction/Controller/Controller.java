@@ -1,6 +1,7 @@
 package com.FutureConnect.FutureConnect.Transaction.Controller;
 
 import com.FutureConnect.FutureConnect.Model.Transaction;
+import com.FutureConnect.FutureConnect.Transaction.DTO.RangeOfTransaction;
 import com.FutureConnect.FutureConnect.Transaction.DTO.TransactionRequest;
 import com.FutureConnect.FutureConnect.Transaction.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,18 @@ public class Controller {
 
     @GetMapping("/{userId}")
     ResponseEntity<List<Transaction>> getTransactions(@PathVariable String userId) {
-        System.out.println(userId);
         List<Transaction> transactions =transactionService.getAllTransactions(userId);
         return ResponseEntity.ok(transactions);
+    }
+    @GetMapping("/range")
+    ResponseEntity<List<Transaction>> getRangeOfTransactions(@RequestBody RangeOfTransaction request) {
+        List<Transaction> transactions =transactionService.getTransactionsByDate(request);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @DeleteMapping("/{transactionId}")
+    ResponseEntity<Void> deleteTransaction(@PathVariable String transactionId) {
+        transactionService.deleteTransaction(transactionId);
+        return ResponseEntity.ok().build();
     }
 }

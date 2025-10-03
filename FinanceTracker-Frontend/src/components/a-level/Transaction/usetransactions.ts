@@ -35,7 +35,7 @@ export default function useTransaction() {
                 date: combineDateAndTime(values.date, values.time),
                 description: values.description,
             };
-
+            console.log(transactionData);
             await createTransaction(transactionData);
             queryClient.invalidateQueries({ queryKey: ["transactions", 'ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e'] });
         },

@@ -2,6 +2,10 @@ import React from 'react';
 import { useDialogStore } from '../../../../Store/DialogStore';
 import Button from '../../../c-level/Button';
 import Input from '../../../c-level/Input';
+import TypeToggleButton from '../../../c-level/TypeToggleButton';
+import CategorySelect from '../../../c-level/CategorySelect';
+import DatePicker from '../../../c-level/DatePicker';
+import TimePicker from '../../../c-level/TimePicker';
 import useTransaction from '../../../a-level/Transaction/usetransactions';
 
 const AddTransactionDialog: React.FC = () => {
@@ -15,7 +19,7 @@ const AddTransactionDialog: React.FC = () => {
 
   const handleTypeChange = (type: 'INCOME' | 'EXPENSE') => {
     formik.setFieldValue('type', type);
-    formik.setFieldValue('category', ''); // Reset category when type changes
+    formik.setFieldValue('category', '');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,8 +29,14 @@ const AddTransactionDialog: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-career-lightGray/30">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in"
+      onClick={closeDialog}
+    >
+      <div
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-career-lightGray/30"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="bg-gradient-to-r from-career-darkGreen to-career-mediumGreen p-6">
           <div className="flex items-center justify-between">
@@ -53,34 +63,16 @@ const AddTransactionDialog: React.FC = () => {
               Transaction Type
             </label>
             <div className="grid grid-cols-2 gap-4">
-              <button
-                type="button"
+              <TypeToggleButton
+                type="EXPENSE"
+                selectedType={formik.values.type}
                 onClick={() => handleTypeChange('EXPENSE')}
-                className={`
-                  p-4 rounded-xl font-semibold transition-all duration-300 border-2
-                  ${formik.values.type === 'EXPENSE'
-                    ? 'bg-red-50 border-red-500 text-red-700 shadow-md'
-                    : 'bg-gray-50 border-gray-200 text-gray-600 hover:border-red-300'
-                  }
-                `}
-              >
-                <span className="text-2xl mb-2 block">💸</span>
-                EXPENSE
-              </button>
-              <button
-                type="button"
+              />
+              <TypeToggleButton
+                type="INCOME"
+                selectedType={formik.values.type}
                 onClick={() => handleTypeChange('INCOME')}
-                className={`
-                  p-4 rounded-xl font-semibold transition-all duration-300 border-2
-                  ${formik.values.type === 'INCOME'
-                    ? 'bg-green-50 border-green-500 text-green-700 shadow-md'
-                    : 'bg-gray-50 border-gray-200 text-gray-600 hover:border-green-300'
-                  }
-                `}
-              >
-                <span className="text-2xl mb-2 block">💰</span>
-                INCOME
-              </button>
+              />
             </div>
           </div>
 
@@ -110,34 +102,13 @@ const AddTransactionDialog: React.FC = () => {
             </label>
             <div className="flex gap-3">
               <div className="relative flex-1">
-                <select
+                <CategorySelect
                   name="category"
                   value={formik.values.category}
                   onChange={formik.handleChange}
+                  options={categories[formik.values.type]}
                   required
-                  className="
-                    w-full px-4 py-3 rounded-2xl shadow-sm border border-career-mediumGreen
-                    bg-career-lightGray text-career-darkGreen
-                    focus:outline-none focus:ring-2 focus:ring-career-darkGreen focus:border-career-darkGreen
-                    transition duration-300 ease-in-out
-                    appearance-none cursor-pointer
-                    hover:border-career-darkGreen
-                  "
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230F4C5C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'right 0.75rem center',
-                    backgroundSize: '1.5em 1.5em',
-                    paddingRight: '2.5rem'
-                  }}
-                >
-                  <option value="">Select a category</option>
-                  {categories[formik.values.type].map((cat: string) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
               <button
                 type="button"
@@ -167,8 +138,7 @@ const AddTransactionDialog: React.FC = () => {
               <label className="block text-sm font-semibold text-career-darkGreen mb-2">
                 Date *
               </label>
-              <Input
-                type="date"
+              <DatePicker
                 name="date"
                 value={formik.values.date}
                 onChange={formik.handleChange}
@@ -179,8 +149,7 @@ const AddTransactionDialog: React.FC = () => {
               <label className="block text-sm font-semibold text-career-darkGreen mb-2">
                 Time *
               </label>
-              <Input
-                type="time"
+              <TimePicker
                 name="time"
                 value={formik.values.time}
                 onChange={formik.handleChange}
