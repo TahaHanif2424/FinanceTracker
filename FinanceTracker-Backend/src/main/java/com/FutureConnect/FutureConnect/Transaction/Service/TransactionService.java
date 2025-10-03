@@ -8,6 +8,10 @@ import com.FutureConnect.FutureConnect.Transaction.Repository.TransactionReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class TransactionService {
 
@@ -26,7 +30,7 @@ public class TransactionService {
         // Validate user exists
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
+        System.out.println(user);
         // Create transaction
         Transaction transaction = new Transaction();
         transaction.setUser(user);
@@ -40,5 +44,16 @@ public class TransactionService {
         transaction.setAmount(request.getAmount());
 
         return transactionRepository.save(transaction);
+    }
+
+    public List<Transaction> getAllTransactions(String userId) {
+        UUID uuid = UUID.fromString(userId);
+        Optional<User> user= userRepository.findById(uuid);
+        if(!user.isPresent()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        List<Transaction> transaction= transactionRepository.findByUserId(uuid);
+        System.out.println(transaction);
+        return transaction;
     }
 }

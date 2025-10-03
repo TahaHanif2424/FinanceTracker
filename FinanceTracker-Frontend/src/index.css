@@ -49,3 +49,27 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+/* Beautify select dropdowns */
+select {
+  background-clip: padding-box;
+}
+
+select option {
+  background-color: white;
+  color: #0F4C5C;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+select option:hover {
+  background-color: #E5E5E5;
+}
+
+select option:checked {
+  background-color: #5E8C61;
+  color: white;
+  font-weight: 600;
+}

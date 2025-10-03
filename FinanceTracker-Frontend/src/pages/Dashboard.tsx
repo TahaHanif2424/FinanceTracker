@@ -16,7 +16,7 @@ const recentTransactions = [
     date: '2024-03-15',
     time: '10:30 AM',
     amount: 125.50,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '🛒',
   },
   {
@@ -25,7 +25,7 @@ const recentTransactions = [
     date: '2024-03-14',
     time: '09:00 AM',
     amount: 3500.00,
-    type: 'income' as const,
+    type: 'INCOME' as const,
     icon: '💵',
   },
   {
@@ -34,7 +34,7 @@ const recentTransactions = [
     date: '2024-03-14',
     time: '03:45 PM',
     amount: 4.50,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '☕',
   },
   {
@@ -43,7 +43,7 @@ const recentTransactions = [
     date: '2024-03-13',
     time: '02:15 PM',
     amount: 89.99,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '⚡',
   },
   {
@@ -52,7 +52,7 @@ const recentTransactions = [
     date: '2024-03-13',
     time: '02:15 PM',
     amount: 89.99,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '⚡',
   },
   {
@@ -61,7 +61,7 @@ const recentTransactions = [
     date: '2024-03-13',
     time: '02:15 PM',
     amount: 89.99,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '⚡',
   },
   {
@@ -70,7 +70,7 @@ const recentTransactions = [
     date: '2024-03-13',
     time: '02:15 PM',
     amount: 89.99,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '⚡',
   },
   {
@@ -79,7 +79,7 @@ const recentTransactions = [
     date: '2024-03-13',
     time: '02:15 PM',
     amount: 89.99,
-    type: 'expense' as const,
+    type: 'EXPENSE' as const,
     icon: '⚡',
   },
 ];

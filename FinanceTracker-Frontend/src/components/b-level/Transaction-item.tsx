@@ -5,7 +5,7 @@ type TransactionItemProps = {
   date: string;
   time: string;
   amount: number;
-  type?: 'income' | 'expense';
+  type?: 'INCOME' | 'EXPENSE';
   icon?: React.ReactNode;
   className?: string;
 };
@@ -15,11 +15,11 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   date,
   time,
   amount,
-  type = 'expense',
+  type = 'EXPENSE',
   icon,
   className = '',
 }) => {
-  const isExpense = type === 'expense';
+  const isExpense = type === 'EXPENSE';
 
   return (
     <div

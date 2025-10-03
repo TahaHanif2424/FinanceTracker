@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/transaction")
 public class Controller {
@@ -16,8 +19,14 @@ public class Controller {
 
     @PostMapping
     ResponseEntity<Transaction> createTransaction(@RequestBody TransactionRequest transaction) {
-        System.out.println(transaction);
         Transaction createdTransaction = transactionService.createTransaction(transaction);
         return ResponseEntity.ok(createdTransaction);
+    }
+
+    @GetMapping("/{userId}")
+    ResponseEntity<List<Transaction>> getTransactions(@PathVariable String userId) {
+        System.out.println(userId);
+        List<Transaction> transactions =transactionService.getAllTransactions(userId);
+        return ResponseEntity.ok(transactions);
     }
 }

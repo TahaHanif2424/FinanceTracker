@@ -1,56 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDialogStore } from '../../../../Store/DialogStore';
 import Button from '../../../c-level/Button';
 import Input from '../../../c-level/Input';
-
-type TransactionFormData = {
-  name: string;
-  amount: string;
-  type: 'income' | 'expense';
-  category: string;
-  date: string;
-  time: string;
-  description: string;
-};
+import useTransaction from '../../../a-level/Transaction/usetransactions';
 
 const AddTransactionDialog: React.FC = () => {
   const { closeDialog } = useDialogStore();
-
-  const [formData, setFormData] = useState<TransactionFormData>({
-    name: '',
-    amount: '',
-    type: 'expense',
-    category: '',
-    date: new Date().toISOString().split('T')[0],
-    time: new Date().toTimeString().split(' ')[0].slice(0, 5),
-    description: '',
-  });
+  const { formik } = useTransaction();
 
   const categories = {
-    expense: ['🛒 Groceries', '☕ Food & Drinks', '⚡ Utilities', '🚗 Transport', '🎮 Entertainment', '🏥 Healthcare', '📚 Education', '🛍️ Shopping', '🏠 Rent', '💼 Other'],
-    income: ['💵 Salary', '💰 Investment', '🎁 Gift', '📈 Bonus', '💳 Refund', '💼 Other']
+    EXPENSE: ['🛒 Groceries', '☕ Food & Drinks', '⚡ Utilities', '🚗 Transport', '🎮 Entertainment', '🏥 Healthcare', '📚 Education', '🛍️ Shopping', '🏠 Rent', '💼 Other'],
+    INCOME: ['💵 Salary', '💰 Investment', '🎁 Gift', '📈 Bonus', '💳 Refund', '💼 Other']
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleTypeChange = (type: 'income' | 'expense') => {
-    setFormData(prev => ({
-      ...prev,
-      type,
-      category: '', // Reset category when type changes
-    }));
+  const handleTypeChange = (type: 'INCOME' | 'EXPENSE') => {
+    formik.setFieldValue('type', type);
+    formik.setFieldValue('category', ''); // Reset category when type changes
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add API call to save transaction
-    console.log('Transaction data:', formData);
+    formik.handleSubmit();
     closeDialog();
   };
 
@@ -85,48 +55,33 @@ const AddTransactionDialog: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
-                onClick={() => handleTypeChange('expense')}
+                onClick={() => handleTypeChange('EXPENSE')}
                 className={`
                   p-4 rounded-xl font-semibold transition-all duration-300 border-2
-                  ${formData.type === 'expense'
+                  ${formik.values.type === 'EXPENSE'
                     ? 'bg-red-50 border-red-500 text-red-700 shadow-md'
                     : 'bg-gray-50 border-gray-200 text-gray-600 hover:border-red-300'
                   }
                 `}
               >
                 <span className="text-2xl mb-2 block">💸</span>
-                Expense
+                EXPENSE
               </button>
               <button
                 type="button"
-                onClick={() => handleTypeChange('income')}
+                onClick={() => handleTypeChange('INCOME')}
                 className={`
                   p-4 rounded-xl font-semibold transition-all duration-300 border-2
-                  ${formData.type === 'income'
+                  ${formik.values.type === 'INCOME'
                     ? 'bg-green-50 border-green-500 text-green-700 shadow-md'
                     : 'bg-gray-50 border-gray-200 text-gray-600 hover:border-green-300'
                   }
                 `}
               >
                 <span className="text-2xl mb-2 block">💰</span>
-                Income
+                INCOME
               </button>
             </div>
-          </div>
-
-          {/* Transaction Name */}
-          <div className="mb-5">
-            <label className="block text-sm font-semibold text-career-darkGreen mb-2">
-              Transaction Name *
-            </label>
-            <Input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="e.g., Grocery Store, Salary"
-              required
-            />
           </div>
 
           {/* Amount */}
@@ -139,8 +94,8 @@ const AddTransactionDialog: React.FC = () => {
               <Input
                 type="number"
                 name="amount"
-                value={formData.amount}
-                onChange={handleInputChange}
+                value={formik.values.amount.toString()}
+                onChange={formik.handleChange}
                 placeholder="0.00"
                 className="pl-8"
                 required
@@ -153,25 +108,57 @@ const AddTransactionDialog: React.FC = () => {
             <label className="block text-sm font-semibold text-career-darkGreen mb-2">
               Category *
             </label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-              required
-              className="
-                w-full px-4 py-2 rounded-2xl shadow-sm border border-career-mediumGreen
-                bg-career-lightGray text-career-darkGreen
-                focus:outline-none focus:ring-2 focus:ring-career-darkGreen focus:border-career-darkGreen
-                transition duration-300 ease-in-out
-              "
-            >
-              <option value="">Select a category</option>
-              {categories[formData.type].map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+            <div className="flex gap-3">
+              <div className="relative flex-1">
+                <select
+                  name="category"
+                  value={formik.values.category}
+                  onChange={formik.handleChange}
+                  required
+                  className="
+                    w-full px-4 py-3 rounded-2xl shadow-sm border border-career-mediumGreen
+                    bg-career-lightGray text-career-darkGreen
+                    focus:outline-none focus:ring-2 focus:ring-career-darkGreen focus:border-career-darkGreen
+                    transition duration-300 ease-in-out
+                    appearance-none cursor-pointer
+                    hover:border-career-darkGreen
+                  "
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230F4C5C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 0.75rem center',
+                    backgroundSize: '1.5em 1.5em',
+                    paddingRight: '2.5rem'
+                  }}
+                >
+                  <option value="">Select a category</option>
+                  {categories[formik.values.type].map((cat: string) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="button"
+                onClick={() => alert('Custom category feature coming soon!')}
+                className="
+                  px-4 py-3 rounded-2xl font-semibold
+                  bg-career-darkGreen text-white
+                  hover:bg-career-mediumGreen
+                  transition-all duration-300
+                  shadow-sm hover:shadow-md
+                  flex items-center gap-2
+                  whitespace-nowrap
+                "
+                title="Create custom category"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Custom
+              </button>
+            </div>
           </div>
 
           {/* Date and Time */}
@@ -183,8 +170,8 @@ const AddTransactionDialog: React.FC = () => {
               <Input
                 type="date"
                 name="date"
-                value={formData.date}
-                onChange={handleInputChange}
+                value={formik.values.date}
+                onChange={formik.handleChange}
                 required
               />
             </div>
@@ -195,8 +182,8 @@ const AddTransactionDialog: React.FC = () => {
               <Input
                 type="time"
                 name="time"
-                value={formData.time}
-                onChange={handleInputChange}
+                value={formik.values.time}
+                onChange={formik.handleChange}
                 required
               />
             </div>
@@ -209,8 +196,8 @@ const AddTransactionDialog: React.FC = () => {
             </label>
             <textarea
               name="description"
-              value={formData.description}
-              onChange={handleInputChange}
+              value={formik.values.description}
+              onChange={formik.handleChange}
               placeholder="Add notes about this transaction..."
               rows={3}
               className="
