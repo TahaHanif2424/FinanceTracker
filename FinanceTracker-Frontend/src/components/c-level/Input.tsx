@@ -8,6 +8,7 @@ type InputProps = {
   className?: string;
   disabled?: boolean;
   required?: boolean;
+  hasError?: boolean;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -20,27 +21,17 @@ const Input: React.FC<InputProps> = ({
   className = "",
   disabled = false,
   required = false,
+  hasError = false,
 }) => {
   const baseClasses = `
-    w-full
-    px-4 py-2
-    rounded-2xl
-    font-small
-    shadow-sm
-    border
-    border-career-mediumGreen
-    focus:outline-none
-    focus:ring-2
-    focus:ring-career-darkGreen
-    focus:border-career-darkGreen
-    transition
-    duration-300
-    ease-in-out
+    w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30
   `;
 
-  const disabledClasses = disabled
-    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-    : "bg-career-lightGray text-career-darkGreen";
+  const stateClasses = disabled
+    ? "bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300"
+    : hasError
+    ? "border-red-400 bg-red-50 focus:border-red-500"
+    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white";
 
   return (
     <input
@@ -51,7 +42,7 @@ const Input: React.FC<InputProps> = ({
       onBlur={onBlur}
       placeholder={placeholder}
       disabled={disabled}
-      className={`${baseClasses} ${disabledClasses} ${className}`}
+      className={`${baseClasses} ${stateClasses} ${className}`}
       required={required}
     />
   );

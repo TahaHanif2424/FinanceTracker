@@ -38,7 +38,7 @@ const AddTransactionDialog: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-career-darkGreen to-career-mediumGreen p-6">
+        <div className=" bg-career-darkGreen">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold text-white flex items-center gap-3">
               <span className="text-3xl">💳</span>
@@ -89,7 +89,6 @@ const AddTransactionDialog: React.FC = () => {
                 value={formik.values.amount.toString()}
                 onChange={formik.handleChange}
                 placeholder="0.00"
-                className="pl-8"
                 required
               />
             </div>

@@ -63,15 +63,11 @@ export default function Login({ changeMode }: AuthProp) {
               <Input
                 type="email"
                 name="email"
-                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
-                  errors.email && touched.email
-                    ? "border-red-400 bg-red-50 focus:border-red-500"
-                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
-                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
                 placeholder="you@example.com"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                hasError={!!(errors.email && touched.email)}
               />
             </div>
             {errors.email && touched.email && (
@@ -89,15 +85,11 @@ export default function Login({ changeMode }: AuthProp) {
               <Input
                 type="password"
                 name="password"
-                className={`w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 ${
-                  errors.password && touched.password
-                    ? "border-red-400 bg-red-50 focus:border-red-500"
-                    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white"
-                } focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30`}
                 placeholder="Enter your password"
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                hasError={!!(errors.password && touched.password)}
               />
             </div>
             {errors.password && touched.password && (
