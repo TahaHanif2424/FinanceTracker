@@ -124,11 +124,9 @@ const TimePicker: React.FC<TimePickerProps> = ({ name, value, onChange, required
         type="button"
         onClick={() => setShowPicker(!showPicker)}
         className="
-          w-full px-4 py-3 rounded-2xl shadow-sm border border-career-mediumGreen
-          bg-career-lightGray text-career-darkGreen
-          focus:outline-none focus:ring-2 focus:ring-career-darkGreen focus:border-career-darkGreen
-          transition duration-300 ease-in-out
-          hover:border-career-darkGreen
+          w-full pl-4 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200
+          focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30
+          border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white
           flex items-center justify-between
           text-left
         "

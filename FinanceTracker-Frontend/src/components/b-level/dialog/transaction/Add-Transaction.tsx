@@ -2,6 +2,7 @@ import React from 'react';
 import { useDialogStore } from '../../../../Store/DialogStore';
 import Button from '../../../c-level/Button';
 import Input from '../../../c-level/Input';
+import TextArea from '../../../c-level/TextArea';
 import TypeToggleButton from '../../../c-level/TypeToggleButton';
 import CategorySelect from '../../../c-level/CategorySelect';
 import DatePicker from '../../../c-level/DatePicker';
@@ -38,7 +39,7 @@ const AddTransactionDialog: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className=" bg-career-darkGreen">
+        <div className=" bg-career-darkGreen p-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold text-white flex items-center gap-3">
               <span className="text-3xl">💳</span>
@@ -82,13 +83,14 @@ const AddTransactionDialog: React.FC = () => {
               Amount *
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">Rs</span>
               <Input
                 type="number"
                 name="amount"
                 value={formik.values.amount.toString()}
                 onChange={formik.handleChange}
                 placeholder="0.00"
+                className="pl-10"
                 required
               />
             </div>
@@ -162,18 +164,12 @@ const AddTransactionDialog: React.FC = () => {
             <label className="block text-sm font-semibold text-career-darkGreen mb-2">
               Description (Optional)
             </label>
-            <textarea
+            <TextArea
               name="description"
               value={formik.values.description}
               onChange={formik.handleChange}
               placeholder="Add notes about this transaction..."
               rows={3}
-              className="
-                w-full px-4 py-2 rounded-2xl shadow-sm border border-career-mediumGreen
-                bg-career-lightGray text-career-darkGreen
-                focus:outline-none focus:ring-2 focus:ring-career-darkGreen focus:border-career-darkGreen
-                transition duration-300 ease-in-out resize-none
-              "
             />
           </div>
 

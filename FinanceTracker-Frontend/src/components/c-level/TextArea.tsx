@@ -1,21 +1,18 @@
-import { twMerge } from 'tailwind-merge';
-
-type InputProps = {
+type TextAreaProps = {
   value: string;
-  type: string;
   name?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
   required?: boolean;
   hasError?: boolean;
+  rows?: number;
 };
 
-const Input: React.FC<InputProps> = ({
+const TextArea: React.FC<TextAreaProps> = ({
   value,
-  type,
   name,
   onChange,
   onBlur,
@@ -24,9 +21,11 @@ const Input: React.FC<InputProps> = ({
   disabled = false,
   required = false,
   hasError = false,
+  rows = 3,
 }) => {
   const baseClasses = `
-    w-full pl-12 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30
+    w-full px-4 py-2 text-base border-2 rounded-xl transition-all duration-200
+    focus:outline-none focus:ring-4 focus:ring-career-mediumGreen/30 resize-none
   `;
 
   const stateClasses = disabled
@@ -36,18 +35,18 @@ const Input: React.FC<InputProps> = ({
     : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white";
 
   return (
-    <input
-      type={type}
+    <textarea
       name={name}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
       placeholder={placeholder}
       disabled={disabled}
-      className={twMerge(baseClasses, stateClasses, className)}
+      className={`${baseClasses} ${stateClasses} ${className}`}
       required={required}
+      rows={rows}
     />
   );
 };
 
-export default Input;
+export default TextArea;
