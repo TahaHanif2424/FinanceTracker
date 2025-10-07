@@ -7,6 +7,9 @@ import TransactionItem from '../components/b-level/Transaction-item';
 import DebtContainer from '../components/a-level/Debt-container';
 import GroupContainer from '../components/a-level/Group-container';
 import { CONTENT_HEIGHT } from '../utils/constants';
+import { useDialogStore } from '../Store/DialogStore';
+import useBalance from '../components/b-level/Balance/useBalance';
+import useIncome from '../components/b-level/Income/useIncome';
 
 // Sample transaction data for dashboard
 const recentTransactions = [
@@ -167,6 +170,10 @@ const groupSettlements = [
 ];
 
 export default function Dashboard() {
+  const { openDialog } = useDialogStore();
+const {balanceData}=useBalance();
+const {incomeData}=useIncome();
+console.log("Balance Data:", balanceData);
   return (
     <div className="p-6 flex flex-col gap-6 bg-gray-50" style={{ height: CONTENT_HEIGHT }}>
       {/* First Row */}
@@ -175,18 +182,20 @@ export default function Dashboard() {
         <div className="grid grid-rows-3 gap-6 min-h-0 h-full">
           <AmountItem
             heading="Total Balance"
-            amount={45230}
+            amount={balanceData}
             icon="💰"
             trend="up"
             trendPercentage={12.5}
+            onClick={() => openDialog('add_balance')}
           />
 
           <AmountItem
             heading="Monthly Income"
-            amount={8750}
+            amount={incomeData}
             icon="💵"
             trend="up"
             trendPercentage={8.3}
+            onClick={() => openDialog('add_income')}
           />
 
           <AmountItem

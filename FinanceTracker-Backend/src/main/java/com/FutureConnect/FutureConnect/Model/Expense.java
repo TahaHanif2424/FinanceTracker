@@ -17,6 +17,6 @@ public class Expense {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    private int currentBalance;
-    private int monthlyExpense;
+    private int currentBalance = 0;
+    private int monthlyExpense = 0;
 }

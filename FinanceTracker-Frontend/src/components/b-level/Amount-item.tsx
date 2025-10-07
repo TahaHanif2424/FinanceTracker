@@ -7,6 +7,7 @@ type AmountItemProps = {
   trend?: 'up' | 'down' | 'neutral';
   trendPercentage?: number;
   className?: string;
+  onClick?: () => void;
 }
 
 const AmountItem: React.FC<AmountItemProps> = ({
@@ -15,7 +16,8 @@ const AmountItem: React.FC<AmountItemProps> = ({
   icon,
   trend = 'neutral',
   trendPercentage,
-  className = ""
+  className = "",
+  onClick
 }) => {
   const getTrendColor = () => {
     switch(trend) {
@@ -34,25 +36,29 @@ const AmountItem: React.FC<AmountItemProps> = ({
   };
 
   return (
-    <div className={`
-      bg-white
-      rounded-xl
-      p-4
-      shadow-md
-      hover:shadow-lg
-      transition-all
-      duration-300
-      ease-in-out
-      hover:-translate-y-1
-      border border-career-lightGray/20
-      flex-1
-      min-w-[200px]
-      max-w-[280px]
-      min-h-0
-      flex
-      flex-col
-      ${className}
-    `}>
+    <div
+      className={`
+        bg-white
+        rounded-xl
+        p-4
+        shadow-md
+        hover:shadow-lg
+        transition-all
+        duration-300
+        ease-in-out
+        hover:-translate-y-1
+        border border-career-lightGray/20
+        flex-1
+        min-w-[200px]
+        max-w-[280px]
+        min-h-0
+        flex
+        flex-col
+        ${onClick ? 'cursor-pointer' : ''}
+        ${className}
+      `}
+      onClick={onClick}
+    >
       <div className="flex items-start justify-between mb-2 flex-shrink-0">
         <div className="p-2 bg-career-darkGreen/10 rounded-lg">
           <div className="text-career-darkGreen text-lg">

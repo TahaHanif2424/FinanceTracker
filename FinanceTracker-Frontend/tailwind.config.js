@@ -10,6 +10,7 @@ export default {
         career: {
           darkGreen: '#0F4C5C',
           mediumGreen: '#5E8C61',
+          lightGreen: '#E8F5E9',
           lightGray: '#E5E5E5',
         },
       },

@@ -121,14 +121,16 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
         flex
         flex-col
         border border-career-lightGray/20
+        h-full
         ${className}
       `}
     >
       {/* Search Bar and Filters */}
       {showHeader && (
-        <div className="mb-6 space-y-4">
-          {/* First Row: Search and Add Button */}
-          <div className="flex gap-4 items-center">
+        <div className="mb-6">
+          {/* Single Row: Search (Left), Date Pickers (Middle), Add Button (Right) */}
+          <div className="flex gap-4 items-end">
+            {/* Search Bar - Left */}
             <div className="flex-1 relative">
               <svg
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-career-mediumGreen w-5 h-5"
@@ -151,43 +153,44 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
               />
             </div>
 
-            <Button onClick={() => openDialog('add-transaction')} className="whitespace-nowrap">
+            {/* Date Range Pickers - Middle */}
+            <div className="flex gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-career-darkGreen mb-2">
+                  From
+                </label>
+                <DatePicker
+                  name="startDate"
+                  value={startDate}
+                  onChange={handleStartDateChange}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-career-darkGreen mb-2">
+                  To
+                </label>
+                <DatePicker
+                  name="endDate"
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                />
+              </div>
+            </div>
+
+            {/* Add Transaction Button - Right */}
+            <Button onClick={() => openDialog('add_transaction')} className="whitespace-nowrap cursor-pointer">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
               Add Transaction
             </Button>
           </div>
-
-          {/* Second Row: Date Range Pickers */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-career-darkGreen mb-2">
-                From
-              </label>
-              <DatePicker
-                name="startDate"
-                value={startDate}
-                onChange={handleStartDateChange}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-career-darkGreen mb-2">
-                To
-              </label>
-              <DatePicker
-                name="endDate"
-                value={endDate}
-                onChange={handleEndDateChange}
-              />
-            </div>
-          </div>
         </div>
       )}
 
       {/* Transaction Count Summary */}
       {!isLoading && filteredTransactions.length > 0 && (
-        <div className="mb-4 text-sm text-gray-600">
+       <div className="mb-4 text-sm text-gray-600">
           Showing {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? 's' : ''} {formatDateRange() && `from ${formatDateRange()}`}
         </div>
       )}
