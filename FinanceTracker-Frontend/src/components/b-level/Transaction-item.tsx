@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDialogStore } from '../../Store/DialogStore';
+import { Pencil, Trash2 } from 'lucide-react';
 
 type TransactionItemProps = {
   name: string;
@@ -35,6 +36,19 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
       description: description || '',
     })
   }
+
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // TODO: Implement edit functionality
+    console.log('Edit transaction:', name);
+  }
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // TODO: Implement delete functionality
+    console.log('Delete transaction:', name);
+  }
+
   return (
     <div
       className={`
@@ -50,10 +64,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         items-center
         justify-between
         gap-4
-        cursor-pointer
+        group
         ${className}
       `}
-        onClick={() => {open()}}
     >
       {/* Left: Icon */}
       <div className="flex-shrink-0">
@@ -66,8 +79,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         </div>
       </div>
 
-      {/* Middle: Name, Date & Time */}
-      <div className="flex-1 min-w-0">
+      {/* Middle: Name, Date & Time - Clickable */}
+      <div className="flex-1 min-w-0 cursor-pointer" onClick={() => {open()}}>
         <h4 className="text-sm font-semibold text-gray-800 truncate">
           {name}
         </h4>
@@ -76,8 +89,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         </p>
       </div>
 
-      {/* Right: Amount */}
-      <div className="flex-shrink-0">
+      {/* Right: Amount & Action Buttons */}
+      <div className="flex items-center gap-3">
+        {/* Amount */}
         <p
           className={`text-sm font-bold ${
             isExpense ? 'text-red-600' : 'text-green-600'
@@ -90,6 +104,27 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
             minimumFractionDigits: 2,
           }).format(Math.abs(amount))}
         </p>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-1">
+          {/* Edit Button */}
+          <button
+            onClick={handleEdit}
+            className="p-2 rounded-lg bg-career-lightGreen hover:bg-career-mediumGreen/20 text-career-darkGreen transition-all duration-200 hover:scale-110"
+            title="Edit transaction"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+
+          {/* Delete Button */}
+          <button
+            onClick={handleDelete}
+            className="p-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-all duration-200 hover:scale-110"
+            title="Delete transaction"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

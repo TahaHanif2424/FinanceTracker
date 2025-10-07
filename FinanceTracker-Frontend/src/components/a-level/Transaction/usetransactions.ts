@@ -3,6 +3,7 @@ import type { Transaction } from "./types";
 import { createTransaction, getTransactions } from "./function";
 import { combineDateAndTime } from "../../../utils/functions";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDataStore } from "../../../Store/DataStore";
 
 type TransactionFormValues = Omit<Transaction, 'date'> & {
     date: string;
@@ -12,6 +13,7 @@ type TransactionFormValues = Omit<Transaction, 'date'> & {
 export default function useTransaction() {
 
     const queryClient = useQueryClient();
+    const { userId } = useDataStore();
 
     const formik = useFormik<TransactionFormValues>({
         initialValues: {
@@ -24,11 +26,13 @@ export default function useTransaction() {
             description: '',
         },
         onSubmit: async (values) => {
+            if (!userId) return;
+
             // Remove emoji icon from category (everything before and including the space)
             const cleanCategory = values.category.split(' ').slice(1).join(' ');
 
             const transactionData: Transaction = {
-                userId: 'ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e',
+                userId,
                 amount: values.amount,
                 type: values.type.toUpperCase() as 'INCOME' | 'EXPENSE',
                 category: cleanCategory,
@@ -37,13 +41,14 @@ export default function useTransaction() {
             };
             console.log(transactionData);
             await createTransaction(transactionData);
-            queryClient.invalidateQueries({ queryKey: ["transactions", 'ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e'] });
+            queryClient.invalidateQueries({ queryKey: ["transactions", userId] });
         },
     });
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['transactions', 'ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e'],
-        queryFn: () => getTransactions('ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e'),
+        queryKey: ['transactions', userId],
+        queryFn: () => getTransactions(userId || ''),
+        enabled: !!userId,
     })
 
     return { formik, data, isLoading, isError };

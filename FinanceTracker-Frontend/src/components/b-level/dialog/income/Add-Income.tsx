@@ -3,14 +3,17 @@ import { useDialogStore } from '../../../../Store/DialogStore';
 import Button from '../../../c-level/Button';
 import Input from '../../../c-level/Input';
 import useIncome from '../../Income/useIncome';
+import { useDataStore } from '../../../../Store/DataStore';
 
 const AddIncomeDialog: React.FC = () => {
   const { closeDialog } = useDialogStore();
+  const { userId } = useDataStore();
   const [income, setIncome] = useState('');
   const {incomeMutation} = useIncome();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    incomeMutation.mutate({monthlyIncome: parseFloat(income), userId: "ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e"});
+    if (!userId) return;
+    incomeMutation.mutate({monthlyIncome: parseFloat(income), userId});
     closeDialog();
   };
 

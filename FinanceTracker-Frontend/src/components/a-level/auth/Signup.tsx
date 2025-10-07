@@ -7,11 +7,12 @@ import { signup } from "./functions";   // <-- Replace with your signup API call
 import type { AuthProp } from "./types";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, User, Loader2, UserPlus } from "lucide-react";
+import { useDataStore } from "../../../Store/DataStore";
 
 export default function Signup({ changeMode }: AuthProp) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  const {setUserData}=useDataStore.getState();
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -28,14 +29,8 @@ export default function Signup({ changeMode }: AuthProp) {
         try {
           const response = await signup(values);
           if (response) {
-            localStorage.setItem(
-              "currentUser",
-              JSON.stringify({
-                id: response.userId,
-                email: values.email,
-                name: values.name,
-              })
-            );
+            setUserData(response.userId,response.email,response.name);
+            console.log("Signup successful:", response);
             navigate("/auth?mode=login");
           }
         } catch (error) {
@@ -148,6 +143,7 @@ export default function Signup({ changeMode }: AuthProp) {
           <div className="mt-6">
             <Button
               disabled={isLoading}
+              type="submit"
             >
               {isLoading ? (
                 <>
@@ -166,14 +162,14 @@ export default function Signup({ changeMode }: AuthProp) {
 
         {/* footer */}
         <div className="mt-8 text-center flex justify-center">
-          <p className="text-career-mediumGreen text-base flex">
+          <p className="text-career-mediumGreen text-base">
             Already have an account?{" "}
-            <p
+            <span
               onClick={changeMode}
               className="font-semibold text-career-darkGreen hover:underline cursor-pointer"
             >
               Sign In
-            </p>
+            </span>
           </p>
         </div>
       </div>

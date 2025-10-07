@@ -7,11 +7,12 @@ import { login } from "./functions";
 import type { AuthProp } from "./types";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, LogIn, Loader2 } from "lucide-react";
+import { useDataStore } from "../../../Store/DataStore";
 
 export default function Login({ changeMode }: AuthProp) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  const {setUserData}=useDataStore.getState();
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -25,14 +26,10 @@ export default function Login({ changeMode }: AuthProp) {
         setIsLoading(true);
         try {
           const response = await login(values);
+          console.log(response);
           if (response) {
-            localStorage.setItem(
-              "currentUser",
-              JSON.stringify({
-                id: response.loggedInUserId,
-                email: values.email,
-              })
-            );
+            console.log("Login successful:", response);
+            setUserData(response.id,response.email,response.name);
             navigate("/dashboard");
           }
         } catch (error) {
@@ -101,6 +98,7 @@ export default function Login({ changeMode }: AuthProp) {
           <div className="mt-6">
             <Button
               disabled={isLoading}
+              type="submit"
             >
               {isLoading ? (
                 <>

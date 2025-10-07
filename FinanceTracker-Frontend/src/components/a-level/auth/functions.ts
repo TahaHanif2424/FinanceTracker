@@ -1,6 +1,8 @@
 import axiosInstance from "../../../libs/axiosInstance"
+import { useDataStore } from "../../../Store/DataStore";
 import type { logindata, signupdata } from "./types";
 
+const {setUserData}=useDataStore.getState();
 export const signup = async (signupdata: signupdata) => {
     if (signupdata.email === '' || signupdata.name === '' || signupdata.password === '' || signupdata.confirmPassword === '') {
         alert("Empty credentials");
@@ -36,7 +38,10 @@ export const login = async (loginData: logindata) => {
             email: loginData.email,
             password: loginData.password
         });
-        return response.data;
+        if(response.data){
+            setUserData(response.data.id,response.data.email,response.data.name);
+            return response.data;
+        }
     } catch (error) {
         console.error(error);
     }

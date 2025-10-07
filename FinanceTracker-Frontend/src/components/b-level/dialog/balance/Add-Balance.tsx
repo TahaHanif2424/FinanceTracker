@@ -3,15 +3,18 @@ import { useDialogStore } from '../../../../Store/DialogStore';
 import Button from '../../../c-level/Button';
 import Input from '../../../c-level/Input';
 import useBalance from '../../Balance/useBalance';
+import { useDataStore } from '../../../../Store/DataStore';
 
 const AddBalanceDialog: React.FC = () => {
   const { closeDialog } = useDialogStore();
+  const { userId } = useDataStore();
   const [balance, setBalance] = useState('');
   const {balanceMutation}=useBalance();
 
   const handleSubmit = (e: React.FormEvent) => {
-    balanceMutation.mutate({balance:parseFloat(balance), userId:"ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e"});
     e.preventDefault();
+    if (!userId) return;
+    balanceMutation.mutate({balance:parseFloat(balance), userId});
     closeDialog();
   };
 
