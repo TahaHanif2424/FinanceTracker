@@ -205,6 +205,7 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
           filteredTransactions.map((transaction: Transaction) => (
             <TransactionItem
               key={transaction.id}
+              id={transaction.id}
               amount={transaction.amount}
               date={transaction.date}
               icon={transaction.icon}

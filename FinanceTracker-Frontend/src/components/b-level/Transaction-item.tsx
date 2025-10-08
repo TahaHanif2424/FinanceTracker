@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDialogStore } from '../../Store/DialogStore';
 import { Pencil, Trash2 } from 'lucide-react';
+import { deleteTransaction } from '../a-level/Transaction/function';
+import { useQueryClient } from '@tanstack/react-query';
+import { useDataStore } from '../../Store/DataStore';
 
 type TransactionItemProps = {
+  id: string;
   name: string;
   date: string;
   time: string;
@@ -15,6 +19,7 @@ type TransactionItemProps = {
 };
 
 const TransactionItem: React.FC<TransactionItemProps> = ({
+  id,
   name,
   date,
   time,
@@ -26,7 +31,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   fullDate,
 }) => {
   const isExpense = type === 'EXPENSE';
-  const dialog=useDialogStore();
+  const dialog = useDialogStore();
+  const queryClient = useQueryClient();
+  const { userId } = useDataStore();
   const open=()=>{
     dialog.openDialog('transaction_detail', {
       amount,
@@ -45,8 +52,21 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // TODO: Implement delete functionality
-    console.log('Delete transaction:', name);
+    dialog.openDialog('confirm_delete', {
+      title: 'Delete Transaction',
+      message: `Are you sure you want to delete the transaction "${name}"? This action cannot be undone.`,
+      onConfirm: async () => {
+        try {
+          await deleteTransaction(id);
+          // Invalidate and refetch transactions
+          queryClient.invalidateQueries({ queryKey: ['transactions', userId] });
+          dialog.closeDialog();
+        } catch (error) {
+          console.error('Failed to delete transaction:', error);
+          dialog.closeDialog();
+        }
+      }
+    });
   }
 
   return (

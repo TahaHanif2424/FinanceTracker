@@ -9,3 +9,7 @@ export const getTransactions = async (userId:string) => {
     const response = await axiosInstance.get(`/transaction/${userId}`);
     return response.data;
 }
+export const deleteTransaction = async (transactionId:string) => {
+    const response = await axiosInstance.delete(`/transaction/${transactionId}`);
+    return response.data;
+}
