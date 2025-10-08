@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { User, ChevronDown } from 'lucide-react';
+import { useDataStore } from '../../../Store/DataStore';
 
 export default function Header() {
   const location = useLocation();
+  const { name, email } = useDataStore();
 
   const getPageName = () => {
     const path = location.pathname;
@@ -51,8 +53,8 @@ export default function Header() {
               <User className="w-5 h-5" />
             </div>
             <div className="text-sm">
-              <p className="font-semibold text-career-darkGreen">John Doe</p>
-              <p className="text-xs text-gray-600">john.doe@example.com</p>
+              <p className="font-semibold text-career-darkGreen">{name || 'User'}</p>
+              <p className="text-xs text-gray-600">{email || 'user@example.com'}</p>
             </div>
             <ChevronDown className="w-4 h-4 text-career-darkGreen" />
           </div>

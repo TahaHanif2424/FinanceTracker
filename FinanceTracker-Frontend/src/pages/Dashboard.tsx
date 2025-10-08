@@ -173,7 +173,6 @@ export default function Dashboard() {
   const { openDialog } = useDialogStore();
 const {balanceData}=useBalance();
 const {incomeData}=useIncome();
-console.log("Balance Data:", balanceData);
   return (
     <div className="p-6 flex flex-col gap-6 bg-gray-50" style={{ height: CONTENT_HEIGHT }}>
       {/* First Row */}
@@ -239,6 +238,7 @@ console.log("Balance Data:", balanceData);
             <div className="flex-1 min-h-0 min-w-0 overflow-y-auto space-y-3">
               {recentTransactions.map((transaction) => (
                 <TransactionItem
+                  id={transaction.id}
                   key={transaction.id}
                   amount={transaction.amount}
                   date={transaction.date}

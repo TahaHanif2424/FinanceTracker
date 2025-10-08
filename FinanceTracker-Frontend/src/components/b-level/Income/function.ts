@@ -12,12 +12,10 @@ export const getIncome = async (userId:string) => {
 
 export const addIncome = async (userId:string, monthlyIncome:number) => {
     try {
-        console.log("Adding income:", { userId, monthlyIncome });
         const response = await axiosInstance.put(`/expense/monthly-income`, {
             userId,
             monthlyIncome
         });
-        console.log("Income added successfully:", response.data);
         return response.data;
     } catch (error) {
         console.error("Error adding income:", error);   

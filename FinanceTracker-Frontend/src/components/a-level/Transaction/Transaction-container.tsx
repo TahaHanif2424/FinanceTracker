@@ -62,7 +62,6 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
       };
     });
   }, [data]);
-  console.log("All Transactions:", allTransactions);
   // Filter transactions based on search and date range
   const filteredTransactions = useMemo(() => {
     let filtered = allTransactions;

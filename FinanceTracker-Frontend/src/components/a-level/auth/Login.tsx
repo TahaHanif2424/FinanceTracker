@@ -26,9 +26,7 @@ export default function Login({ changeMode }: AuthProp) {
         setIsLoading(true);
         try {
           const response = await login(values);
-          console.log(response);
           if (response) {
-            console.log("Login successful:", response);
             setUserData(response.id,response.email,response.name);
             navigate("/dashboard");
           }

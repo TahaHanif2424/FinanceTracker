@@ -7,11 +7,9 @@ export const createTransaction = async (params:Transaction) => {
 }
 export const getTransactions = async (userId:string) => {
     const response = await axiosInstance.get(`/transaction/${userId}`);
-    console.log("Get response:",response);
     return response.data;
 }
 export const deleteTransaction = async (transactionId:string) => {
     const response = await axiosInstance.delete(`/transaction/${transactionId}`);
-    console.log("Delete response:",response);
     return response.data;
 }

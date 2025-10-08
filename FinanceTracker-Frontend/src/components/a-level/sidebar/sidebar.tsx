@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { sidebar_item } from '../../../utils/constants';
 import Tooltip from '../../c-level/Tooltip';
+import { useDataStore } from '../../../Store/DataStore';
 import {
   Menu,
   X,
@@ -17,6 +18,8 @@ import {
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { resetUserData } = useDataStore();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -47,8 +50,8 @@ export default function Sidebar() {
   const bottomItems = sidebar_item.filter(item => item.placement === 'bottom');
 
   const handleLogout = () => {
-    localStorage.removeItem('currentUser');
-    window.location.href = '/auth?mode=login';
+    resetUserData();
+    navigate('/auth?mode=login');
   };
 
   return (

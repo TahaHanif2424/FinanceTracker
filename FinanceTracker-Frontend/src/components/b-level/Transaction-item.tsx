@@ -46,8 +46,6 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // TODO: Implement edit functionality
-    console.log('Edit transaction:', name);
   }
 
   const handleDelete = (e: React.MouseEvent) => {

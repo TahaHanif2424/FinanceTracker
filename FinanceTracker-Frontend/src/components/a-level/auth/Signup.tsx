@@ -30,7 +30,6 @@ export default function Signup({ changeMode }: AuthProp) {
           const response = await signup(values);
           if (response) {
             setUserData(response.userId,response.email,response.name);
-            console.log("Signup successful:", response);
             navigate("/auth?mode=login");
           }
         } catch (error) {
