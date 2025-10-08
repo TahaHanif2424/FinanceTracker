@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { addIncome, getIncome } from "./function";
+import { useDataStore } from "../../../Store/DataStore";
 
 export default function useIncome() {
+    const {userId}=useDataStore();
     const { data: incomeData, isLoading, refetch } = useQuery({
         queryKey: ['income'],
-        queryFn: () => getIncome("ae66fe75-c3ee-4bd7-98d9-74c7dbe5520e"), // Replace with actual userId
+        queryFn: () => getIncome(userId || ''),
     });
     const incomeMutation = useMutation({
         mutationFn: ({ monthlyIncome, userId }: { monthlyIncome: number; userId: string }) => addIncome(userId, monthlyIncome),

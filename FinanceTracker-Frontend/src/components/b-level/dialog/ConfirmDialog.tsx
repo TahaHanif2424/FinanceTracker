@@ -1,6 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import Button from './Button';
+import Button from '../../c-level/Button';
 
 type ConfirmDialogProps = {
   title: string;
@@ -21,6 +21,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   cancelText = 'Cancel',
   confirmButtonClass = 'bg-red-600 hover:bg-red-700',
 }) => {
+  console.log(onConfirm);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
       <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">

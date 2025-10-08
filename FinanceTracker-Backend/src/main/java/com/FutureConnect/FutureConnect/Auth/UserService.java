@@ -1,5 +1,6 @@
 package com.FutureConnect.FutureConnect.Auth;
 
+import com.FutureConnect.FutureConnect.Expense.ExpenseService;
 import com.FutureConnect.FutureConnect.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +15,8 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private ExpenseService expenseService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public User signup(User user){
@@ -27,8 +30,15 @@ public class UserService {
 //        if(user.getPassword().length() < 6){
 //            throw new IllegalArgumentException("Password must be at least 6 characters");
 //        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+
+        User savedUser = userRepository.save(user);
+
+        // Initialize balance and monthly expense to 0
+        expenseService.addBalance(savedUser.getId().toString(), 0);
+
+        return savedUser;
     }
 
     public User login(User user){

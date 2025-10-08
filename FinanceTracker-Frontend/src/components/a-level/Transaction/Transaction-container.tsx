@@ -42,7 +42,7 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
     return (data || []).map((transaction: APITransaction) => {
       const transactionDate = new Date(transaction.date);
       return {
-        id: String(transaction.userId) + transaction.date,
+        id: String(transaction.id),
         name: transaction.category,
         date: transactionDate.toLocaleDateString('en-US', {
           month: 'short',
@@ -62,7 +62,7 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
       };
     });
   }, [data]);
-
+  console.log("All Transactions:", allTransactions);
   // Filter transactions based on search and date range
   const filteredTransactions = useMemo(() => {
     let filtered = allTransactions;

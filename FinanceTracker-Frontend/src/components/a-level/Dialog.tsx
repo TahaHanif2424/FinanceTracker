@@ -3,7 +3,7 @@ import AddTransactionDialog from '../b-level/dialog/transaction/Add-Transaction'
 import TransactionDetail from '../b-level/dialog/transaction/Transaction-Detail';
 import AddBalanceDialog from '../b-level/dialog/balance/Add-Balance';
 import AddIncomeDialog from '../b-level/dialog/income/Add-Income';
-import ConfirmDialog from '../c-level/ConfirmDialog';
+import ConfirmDialog from '../b-level/dialog/ConfirmDialog';
 
 export default function Dialog() {
     const dialog = useDialogStore()
