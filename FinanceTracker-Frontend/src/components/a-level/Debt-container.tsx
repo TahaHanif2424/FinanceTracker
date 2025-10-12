@@ -1,12 +1,12 @@
-import React from 'react';
-import DebtItem from '../b-level/Debt-item';
+import React from "react";
+import DebtItem from "../b-level/Debt-item";
 
 type Debt = {
   id: string;
   userName: string;
   amount: number;
   date: string;
-  type: 'receivable' | 'payable';
+  type: "receivable" | "payable";
   userImage?: string;
 };
 
@@ -18,7 +18,7 @@ type DebtContainerProps = {
 
 const DebtContainer: React.FC<DebtContainerProps> = ({
   debts = [],
-  className = '',
+  className = "",
   showHeader = true,
 }) => {
   return (

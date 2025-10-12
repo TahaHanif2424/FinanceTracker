@@ -1,6 +1,6 @@
-import React from 'react';
-import { X } from 'lucide-react';
-import Button from '../../c-level/Button';
+import React from "react";
+import { X } from "lucide-react";
+import Button from "../../c-level/Button";
 
 type ConfirmDialogProps = {
   title: string;
@@ -17,9 +17,9 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   message,
   onConfirm,
   onCancel,
-  confirmText = 'Confirm',
-  cancelText = 'Cancel',
-  confirmButtonClass = 'bg-red-600 hover:bg-red-700',
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  confirmButtonClass = "bg-red-600 hover:bg-red-700",
 }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
@@ -38,9 +38,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 
         {/* Content */}
         <div className="p-6">
-          <p className="text-gray-700 text-base leading-relaxed">
-            {message}
-          </p>
+          <p className="text-gray-700 text-base leading-relaxed">{message}</p>
         </div>
 
         {/* Actions */}
@@ -51,10 +49,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           >
             {cancelText}
           </button>
-          <Button
-            onClick={onConfirm}
-            className={confirmButtonClass}
-          >
+          <Button onClick={onConfirm} className={confirmButtonClass}>
             {confirmText}
           </Button>
         </div>

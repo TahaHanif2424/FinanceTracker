@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 type DebtItemProps = {
   userName: string;
   amount: number;
   date: string;
-  type: 'receivable' | 'payable'; // receivable = to receive, payable = to give
+  type: "receivable" | "payable"; // receivable = to receive, payable = to give
   userImage?: string;
   className?: string;
 };
@@ -15,9 +15,9 @@ const DebtItem: React.FC<DebtItemProps> = ({
   date,
   type,
   userImage,
-  className = '',
+  className = "",
 }) => {
-  const isReceivable = type === 'receivable';
+  const isReceivable = type === "receivable";
 
   return (
     <div
@@ -60,23 +60,21 @@ const DebtItem: React.FC<DebtItemProps> = ({
           {userName}
         </h4>
         <p className="text-xs text-gray-600 mt-0.5">
-          {isReceivable ? 'To Receive' : 'To Give'}
+          {isReceivable ? "To Receive" : "To Give"}
         </p>
-        <p className="text-xs text-gray-500 mt-0.5">
-          {date}
-        </p>
+        <p className="text-xs text-gray-500 mt-0.5">{date}</p>
       </div>
 
       {/* Right: Amount */}
       <div className="flex-shrink-0">
         <p
           className={`text-sm font-bold ${
-            isReceivable ? 'text-green-600' : 'text-red-600'
+            isReceivable ? "text-green-600" : "text-red-600"
           }`}
         >
-          {new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
             minimumFractionDigits: 2,
           }).format(Math.abs(amount))}
         </p>

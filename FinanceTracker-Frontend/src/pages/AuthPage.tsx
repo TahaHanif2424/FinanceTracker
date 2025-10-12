@@ -45,7 +45,11 @@ export default function AuthPage() {
         {/* Content */}
         <div className="relative z-10 max-w-lg">
           <div className="flex items-center mb-8">
-            <img src="/logo-bg.png" alt="Finance Tracker" className="w-20 h-20 mr-4" />
+            <img
+              src="/logo-bg.png"
+              alt="Finance Tracker"
+              className="w-20 h-20 mr-4"
+            />
             <h1 className="text-4xl font-bold">Finance Tracker</h1>
           </div>
 
@@ -54,7 +58,8 @@ export default function AuthPage() {
           </h2>
 
           <p className="text-lg mb-6 opacity-90">
-            Track expenses, manage budgets, and achieve your financial goals with our comprehensive finance management platform.
+            Track expenses, manage budgets, and achieve your financial goals
+            with our comprehensive finance management platform.
           </p>
 
           <div className="space-y-4">
@@ -64,7 +69,9 @@ export default function AuthPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Smart Budgeting</h3>
-                <p className="opacity-80">Create and monitor budgets that adapt to your spending habits</p>
+                <p className="opacity-80">
+                  Create and monitor budgets that adapt to your spending habits
+                </p>
               </div>
             </div>
 
@@ -74,7 +81,9 @@ export default function AuthPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Visual Reports</h3>
-                <p className="opacity-80">Gain insights with beautiful charts and detailed analytics</p>
+                <p className="opacity-80">
+                  Gain insights with beautiful charts and detailed analytics
+                </p>
               </div>
             </div>
 
@@ -84,7 +93,9 @@ export default function AuthPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Goal Tracking</h3>
-                <p className="opacity-80">Set financial goals and track your progress in real-time</p>
+                <p className="opacity-80">
+                  Set financial goals and track your progress in real-time
+                </p>
               </div>
             </div>
           </div>
@@ -93,9 +104,7 @@ export default function AuthPage() {
 
       {/* Right Half - Auth Form */}
       <div className="w-1/2 flex items-center justify-center bg-career-lightGray p-12">
-        <div className="w-full max-w-md">
-          {componentRender}
-        </div>
+        <div className="w-full max-w-md">{componentRender}</div>
       </div>
     </div>
   );

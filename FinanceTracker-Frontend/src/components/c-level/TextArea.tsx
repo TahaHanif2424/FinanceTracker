@@ -31,8 +31,8 @@ const TextArea: React.FC<TextAreaProps> = ({
   const stateClasses = disabled
     ? "bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300"
     : hasError
-    ? "border-red-400 bg-red-50 focus:border-red-500"
-    : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white";
+      ? "border-red-400 bg-red-50 focus:border-red-500"
+      : "border-career-lightGray hover:border-career-mediumGreen focus:border-career-darkGreen bg-white";
 
   return (
     <textarea

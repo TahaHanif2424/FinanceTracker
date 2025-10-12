@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDialogStore } from '../../../../Store/DialogStore';
-import type { Transaction } from '../../../a-level/Transaction/types';
-import DetailItem from '../../../c-level/DetailItem';
+import React from "react";
+import { useDialogStore } from "../../../../Store/DialogStore";
+import type { Transaction } from "../../../a-level/Transaction/types";
+import DetailItem from "../../../c-level/DetailItem";
 
 const TransactionDetail: React.FC = () => {
   const { closeDialog, dialogData } = useDialogStore();
@@ -14,24 +14,24 @@ const TransactionDetail: React.FC = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     });
   };
 
-  const isExpense = transaction.type === 'EXPENSE';
+  const isExpense = transaction.type === "EXPENSE";
 
   return (
     <div
@@ -53,8 +53,18 @@ const TransactionDetail: React.FC = () => {
               onClick={closeDialog}
               className="text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -67,14 +77,27 @@ const TransactionDetail: React.FC = () => {
             {/* Amount */}
             <DetailItem
               icon={
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
               }
               label="Amount"
               value={
-                <div className={`text-2xl font-bold ${isExpense ? 'text-red-600' : 'text-green-600'}`}>
-                  {isExpense ? '-' : '+'}${transaction.amount ? transaction.amount.toFixed(2) : '0.00'}
+                <div
+                  className={`text-2xl font-bold ${isExpense ? "text-red-600" : "text-green-600"}`}
+                >
+                  {isExpense ? "-" : "+"}$
+                  {transaction.amount ? transaction.amount.toFixed(2) : "0.00"}
                 </div>
               }
             />
@@ -82,28 +105,64 @@ const TransactionDetail: React.FC = () => {
             {/* Category */}
             <DetailItem
               icon={
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  />
                 </svg>
               }
               label="Category"
-              value={<div className="text-base font-bold text-career-darkGreen">{transaction.category}</div>}
+              value={
+                <div className="text-base font-bold text-career-darkGreen">
+                  {transaction.category}
+                </div>
+              }
             />
 
             {/* Date & Time */}
             <DetailItem
               icon={
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
               }
               label="Date & Time"
               value={
                 <>
-                  <div className="text-sm font-bold text-career-darkGreen">{formatDate(transaction.date)}</div>
+                  <div className="text-sm font-bold text-career-darkGreen">
+                    {formatDate(transaction.date)}
+                  </div>
                   <div className="text-xs font-semibold text-career-mediumGreen mt-0.5 flex items-center gap-1">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     {formatTime(transaction.date)}
                   </div>
@@ -115,8 +174,18 @@ const TransactionDetail: React.FC = () => {
             {transaction.description && (
               <DetailItem
                 icon={
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    />
                   </svg>
                 }
                 label="Description"

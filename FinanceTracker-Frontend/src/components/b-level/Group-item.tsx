@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 type GroupItemProps = {
   groupName: string;
   amount: number;
   date: string;
-  type: 'receivable' | 'payable'; // receivable = to receive, payable = to give
+  type: "receivable" | "payable"; // receivable = to receive, payable = to give
   groupIcon?: string;
   className?: string;
 };
@@ -15,9 +15,9 @@ const GroupItem: React.FC<GroupItemProps> = ({
   date,
   type,
   groupIcon,
-  className = '',
+  className = "",
 }) => {
-  const isReceivable = type === 'receivable';
+  const isReceivable = type === "receivable";
 
   return (
     <div
@@ -55,9 +55,7 @@ const GroupItem: React.FC<GroupItemProps> = ({
           <h4 className="text-sm font-semibold text-gray-800 truncate">
             {groupName}
           </h4>
-          <p className="text-xs text-gray-500 mt-0.5">
-            {date}
-          </p>
+          <p className="text-xs text-gray-500 mt-0.5">{date}</p>
         </div>
       </div>
 
@@ -65,17 +63,17 @@ const GroupItem: React.FC<GroupItemProps> = ({
       <div className="flex-shrink-0 text-right">
         <p
           className={`text-sm font-bold ${
-            isReceivable ? 'text-green-600' : 'text-red-600'
+            isReceivable ? "text-green-600" : "text-red-600"
           }`}
         >
-          {new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
             minimumFractionDigits: 2,
           }).format(Math.abs(amount))}
         </p>
         <p className="text-xs text-gray-600 mt-0.5">
-          {isReceivable ? 'To Receive' : 'To Give'}
+          {isReceivable ? "To Receive" : "To Give"}
         </p>
       </div>
     </div>

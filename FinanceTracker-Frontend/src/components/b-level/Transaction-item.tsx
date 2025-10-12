@@ -1,9 +1,9 @@
-import React from 'react';
-import { useDialogStore } from '../../Store/DialogStore';
-import { Pencil, Trash2 } from 'lucide-react';
-import { deleteTransaction } from '../a-level/Transaction/function';
-import { useQueryClient } from '@tanstack/react-query';
-import { useDataStore } from '../../Store/DataStore';
+import React from "react";
+import { useDialogStore } from "../../Store/DialogStore";
+import { Pencil, Trash2 } from "lucide-react";
+import { deleteTransaction } from "../a-level/Transaction/function";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDataStore } from "../../Store/DataStore";
 
 type TransactionItemProps = {
   id: string;
@@ -11,7 +11,7 @@ type TransactionItemProps = {
   date: string;
   time: string;
   amount: number;
-  type?: 'INCOME' | 'EXPENSE';
+  type?: "INCOME" | "EXPENSE";
   icon?: React.ReactNode;
   className?: string;
   description?: string;
@@ -24,48 +24,48 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   date,
   time,
   amount,
-  type = 'EXPENSE',
+  type = "EXPENSE",
   icon,
-  className = '',
-  description = '',
+  className = "",
+  description = "",
   fullDate,
 }) => {
-  const isExpense = type === 'EXPENSE';
+  const isExpense = type === "EXPENSE";
   const dialog = useDialogStore();
   const queryClient = useQueryClient();
   const { userId } = useDataStore();
-  const open=()=>{
-    dialog.openDialog('transaction_detail', {
+  const open = () => {
+    dialog.openDialog("transaction_detail", {
       amount,
       type,
       category: name,
       date: fullDate || date,
-      description: description || '',
-    })
-  }
+      description: description || "",
+    });
+  };
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
-  }
+  };
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dialog.openDialog('confirm_delete', {
-      title: 'Delete Transaction',
+    dialog.openDialog("confirm_delete", {
+      title: "Delete Transaction",
       message: `Are you sure you want to delete the transaction "${name}"? This action cannot be undone.`,
       onConfirm: async () => {
         try {
           await deleteTransaction(id);
           // Invalidate and refetch transactions
-          queryClient.invalidateQueries({ queryKey: ['transactions', userId] });
+          queryClient.invalidateQueries({ queryKey: ["transactions", userId] });
           dialog.closeDialog();
         } catch (error) {
-          console.error('Failed to delete transaction:', error);
+          console.error("Failed to delete transaction:", error);
           dialog.closeDialog();
         }
-      }
+      },
     });
-  }
+  };
 
   return (
     <div
@@ -89,19 +89,18 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
       {/* Left: Icon */}
       <div className="flex-shrink-0">
         <div className="w-10 h-10 rounded-full bg-career-darkGreen/10 flex items-center justify-center">
-          {icon || (
-            <span className="text-lg">
-              {isExpense ? '💸' : '💰'}
-            </span>
-          )}
+          {icon || <span className="text-lg">{isExpense ? "💸" : "💰"}</span>}
         </div>
       </div>
 
       {/* Middle: Name, Date & Time - Clickable */}
-      <div className="flex-1 min-w-0 cursor-pointer" onClick={() => {open()}}>
-        <h4 className="text-sm font-semibold text-gray-800 truncate">
-          {name}
-        </h4>
+      <div
+        className="flex-1 min-w-0 cursor-pointer"
+        onClick={() => {
+          open();
+        }}
+      >
+        <h4 className="text-sm font-semibold text-gray-800 truncate">{name}</h4>
         <p className="text-xs text-gray-500 mt-0.5">
           {date} • {time}
         </p>
@@ -112,13 +111,13 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         {/* Amount */}
         <p
           className={`text-sm font-bold ${
-            isExpense ? 'text-red-600' : 'text-green-600'
+            isExpense ? "text-red-600" : "text-green-600"
           }`}
         >
-          {isExpense ? '-' : '+'}
-          {new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
+          {isExpense ? "-" : "+"}
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
             minimumFractionDigits: 2,
           }).format(Math.abs(amount))}
         </p>

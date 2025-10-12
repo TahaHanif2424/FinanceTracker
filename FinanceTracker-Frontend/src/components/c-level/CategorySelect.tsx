@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface CategorySelectProps {
   name: string;
@@ -15,7 +15,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   onChange,
   options,
   required = false,
-  hasError = false
+  hasError = false,
 }) => {
   const baseClasses = `
     w-full pl-4 pr-4 py-2 text-base border-2 rounded-xl transition-all duration-200
@@ -36,10 +36,10 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
       className={`${baseClasses} ${stateClasses}`}
       style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230F4C5C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right 0.75rem center',
-        backgroundSize: '1.5em 1.5em',
-        paddingRight: '2.5rem'
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right 0.75rem center",
+        backgroundSize: "1.5em 1.5em",
+        paddingRight: "2.5rem",
       }}
     >
       <option value="">Select a category</option>

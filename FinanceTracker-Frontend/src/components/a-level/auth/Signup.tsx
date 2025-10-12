@@ -3,7 +3,7 @@ import Input from "../../c-level/Input";
 import Button from "../../c-level/Button";
 import { useFormik } from "formik";
 import { signupSchema } from "./Schema"; // <-- You'll need a separate schema for signup
-import { signup } from "./functions";   // <-- Replace with your signup API call
+import { signup } from "./functions"; // <-- Replace with your signup API call
 import type { AuthProp } from "./types";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, User, Loader2, UserPlus } from "lucide-react";
@@ -12,7 +12,7 @@ import { useDataStore } from "../../../Store/DataStore";
 export default function Signup({ changeMode }: AuthProp) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const {setUserData}=useDataStore.getState();
+  const { setUserData } = useDataStore.getState();
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -29,7 +29,7 @@ export default function Signup({ changeMode }: AuthProp) {
         try {
           const response = await signup(values);
           if (response) {
-            setUserData(response.userId,response.email,response.name);
+            setUserData(response.userId, response.email, response.name);
             navigate("/auth?mode=login");
           }
         } catch (error) {
@@ -46,7 +46,9 @@ export default function Signup({ changeMode }: AuthProp) {
 
       <div className="relative z-10">
         {/* header */}
-        <h2 className="text-xl font-semibold text-center text-career-darkGreen mb-8">Sign Up</h2>
+        <h2 className="text-xl font-semibold text-center text-career-darkGreen mb-8">
+          Sign Up
+        </h2>
 
         {/* form */}
         <form className="space-y-2" onSubmit={handleSubmit}>
@@ -134,16 +136,15 @@ export default function Signup({ changeMode }: AuthProp) {
               />
             </div>
             {errors.confirmPassword && touched.confirmPassword && (
-              <p className="text-red-500 text-sm mt-2">{errors.confirmPassword}</p>
+              <p className="text-red-500 text-sm mt-2">
+                {errors.confirmPassword}
+              </p>
             )}
           </div>
 
           {/* button */}
           <div className="mt-6">
-            <Button
-              disabled={isLoading}
-              type="submit"
-            >
+            <Button disabled={isLoading} type="submit">
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />

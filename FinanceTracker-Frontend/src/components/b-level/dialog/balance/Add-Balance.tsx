@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useDialogStore } from '../../../../Store/DialogStore';
-import Button from '../../../c-level/Button';
-import Input from '../../../c-level/Input';
-import useBalance from '../../Balance/useBalance';
-import { useDataStore } from '../../../../Store/DataStore';
+import React, { useState } from "react";
+import { useDialogStore } from "../../../../Store/DialogStore";
+import Button from "../../../c-level/Button";
+import Input from "../../../c-level/Input";
+import useBalance from "../../Balance/useBalance";
+import { useDataStore } from "../../../../Store/DataStore";
 
 const AddBalanceDialog: React.FC = () => {
   const { closeDialog } = useDialogStore();
   const { userId } = useDataStore();
-  const [balance, setBalance] = useState('');
-  const {balanceMutation}=useBalance();
+  const [balance, setBalance] = useState("");
+  const { balanceMutation } = useBalance();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userId) return;
-    balanceMutation.mutate({balance:parseFloat(balance), userId});
+    balanceMutation.mutate({ balance: parseFloat(balance), userId });
     closeDialog();
   };
 
@@ -38,8 +38,18 @@ const AddBalanceDialog: React.FC = () => {
               onClick={closeDialog}
               className="text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -53,7 +63,9 @@ const AddBalanceDialog: React.FC = () => {
               Total Balance *
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">Rs</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">
+                Rs
+              </span>
               <Input
                 type="number"
                 name="balance"

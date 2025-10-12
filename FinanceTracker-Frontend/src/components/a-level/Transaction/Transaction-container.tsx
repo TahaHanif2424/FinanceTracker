@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import TransactionItem from '../../b-level/Transaction-item';
-import useTransaction from './usetransactions';
-import { getCategoryIcon } from '../../../utils/categoryIcons';
-import type { Transaction as APITransaction } from './types';
-import Loader from '../../c-level/Loader';
-import Input from '../../c-level/Input';
-import DatePicker from '../../c-level/DatePicker';
-import Button from '../../c-level/Button';
-import { useDialogStore } from '../../../Store/DialogStore';
+import React, { useState, useMemo } from "react";
+import TransactionItem from "../../b-level/Transaction-item";
+import useTransaction from "./usetransactions";
+import { getCategoryIcon } from "../../../utils/categoryIcons";
+import type { Transaction as APITransaction } from "./types";
+import Loader from "../../c-level/Loader";
+import Input from "../../c-level/Input";
+import DatePicker from "../../c-level/DatePicker";
+import Button from "../../c-level/Button";
+import { useDialogStore } from "../../../Store/DialogStore";
 
 type Transaction = {
   id: string;
@@ -15,7 +15,7 @@ type Transaction = {
   date: string;
   time: string;
   amount: number;
-  type: 'INCOME' | 'EXPENSE';
+  type: "INCOME" | "EXPENSE";
   icon?: React.ReactNode;
   description?: string;
   fullDate: string;
@@ -28,14 +28,14 @@ type TransactionContainerProps = {
 };
 
 const TransactionContainer: React.FC<TransactionContainerProps> = ({
-  className = '',
+  className = "",
   showHeader = true,
 }) => {
-  const {data, isLoading}=useTransaction();
+  const { data, isLoading } = useTransaction();
   const { openDialog } = useDialogStore();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   // Transform API data to include icons based on category
   const allTransactions = useMemo(() => {
@@ -44,15 +44,15 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
       return {
         id: String(transaction.id),
         name: transaction.category,
-        date: transactionDate.toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric'
+        date: transactionDate.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
         }),
-        time: transactionDate.toLocaleTimeString('en-US', {
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
+        time: transactionDate.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
         }),
         amount: transaction.amount,
         type: transaction.type,
@@ -68,15 +68,18 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
 
     // Apply search filter
     if (searchQuery) {
-      filtered = filtered.filter(transaction =>
-        transaction.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        transaction.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (transaction) =>
+          transaction.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          transaction.description
+            ?.toLowerCase()
+            .includes(searchQuery.toLowerCase()),
       );
     }
 
     // Apply date range filter
     if (startDate && endDate) {
-      filtered = filtered.filter(transaction => {
+      filtered = filtered.filter((transaction) => {
         const transDate = new Date(transaction.fullDate);
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -101,13 +104,13 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
 
   // Format date range for display
   const formatDateRange = () => {
-    if (filteredTransactions.length === 0) return '';
+    if (filteredTransactions.length === 0) return "";
 
-    const dates = filteredTransactions.map(t => new Date(t.fullDate));
-    const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
-    const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
+    const dates = filteredTransactions.map((t) => new Date(t.fullDate));
+    const minDate = new Date(Math.min(...dates.map((d) => d.getTime())));
+    const maxDate = new Date(Math.max(...dates.map((d) => d.getTime())));
 
-    return `${minDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${maxDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    return `${minDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })} – ${maxDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
   };
 
   return (
@@ -177,9 +180,22 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
             </div>
 
             {/* Add Transaction Button - Right */}
-            <Button onClick={() => openDialog('add_transaction')} className="whitespace-nowrap cursor-pointer">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            <Button
+              onClick={() => openDialog("add_transaction")}
+              className="whitespace-nowrap cursor-pointer"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
               </svg>
               Add Transaction
             </Button>
@@ -189,8 +205,10 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
 
       {/* Transaction Count Summary */}
       {!isLoading && filteredTransactions.length > 0 && (
-       <div className="mb-4 text-sm text-gray-600">
-          Showing {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? 's' : ''} {formatDateRange() && `from ${formatDateRange()}`}
+        <div className="mb-4 text-sm text-gray-600">
+          Showing {filteredTransactions.length} transaction
+          {filteredTransactions.length !== 1 ? "s" : ""}{" "}
+          {formatDateRange() && `from ${formatDateRange()}`}
         </div>
       )}
 
@@ -218,7 +236,9 @@ const TransactionContainer: React.FC<TransactionContainerProps> = ({
         ) : (
           <div className="flex items-center justify-center py-12">
             <p className="text-gray-500 text-sm">
-              {searchQuery || startDate || endDate ? 'No transactions match your filters' : 'No transactions to display'}
+              {searchQuery || startDate || endDate
+                ? "No transactions match your filters"
+                : "No transactions to display"}
             </p>
           </div>
         )}

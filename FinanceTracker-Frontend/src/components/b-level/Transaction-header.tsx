@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Button from '../c-level/Button';
-import Input from '../c-level/Input';
-import DatePicker from '../c-level/DatePicker';
-import { useDialogStore } from '../../Store/DialogStore';
+import React, { useState } from "react";
+import Button from "../c-level/Button";
+import Input from "../c-level/Input";
+import DatePicker from "../c-level/DatePicker";
+import { useDialogStore } from "../../Store/DialogStore";
 
 type TransactionHeaderProps = {
   onSearchChange?: (search: string) => void;
@@ -13,9 +13,9 @@ const TransactionHeader: React.FC<TransactionHeaderProps> = ({
   onSearchChange,
   onDateRangeChange,
 }) => {
-  const [searchValue, setSearchValue] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [searchValue, setSearchValue] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [showDateRange, setShowDateRange] = useState(false);
   const { openDialog } = useDialogStore();
 
@@ -70,7 +70,12 @@ const TransactionHeader: React.FC<TransactionHeaderProps> = ({
           onClick={() => setShowDateRange(!showDateRange)}
           className="px-4 py-2 rounded-xl border-2 border-career-lightGray hover:border-career-mediumGreen bg-white text-career-darkGreen font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -80,19 +85,37 @@ const TransactionHeader: React.FC<TransactionHeaderProps> = ({
           </svg>
           📅 Date Range
           <svg
-            className={`w-4 h-4 transition-transform duration-200 ${showDateRange ? 'rotate-180' : ''}`}
+            className={`w-4 h-4 transition-transform duration-200 ${showDateRange ? "rotate-180" : ""}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
 
         {/* Add Transaction Button */}
-        <Button onClick={() => openDialog('add-transaction')} className="whitespace-nowrap">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        <Button
+          onClick={() => openDialog("add-transaction")}
+          className="whitespace-nowrap"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 4v16m8-8H4"
+            />
           </svg>
           Add Transaction
         </Button>

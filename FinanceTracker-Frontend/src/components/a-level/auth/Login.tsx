@@ -12,7 +12,7 @@ import { useDataStore } from "../../../Store/DataStore";
 export default function Login({ changeMode }: AuthProp) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const {setUserData}=useDataStore.getState();
+  const { setUserData } = useDataStore.getState();
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -27,7 +27,7 @@ export default function Login({ changeMode }: AuthProp) {
         try {
           const response = await login(values);
           if (response) {
-            setUserData(response.id,response.email,response.name);
+            setUserData(response.id, response.email, response.name);
             navigate("/dashboard");
           }
         } catch (error) {
@@ -41,10 +41,12 @@ export default function Login({ changeMode }: AuthProp) {
   return (
     <div className="relative bg-white backdrop-blur-md p-12 rounded-3xl shadow-2xl w-full max-w-lg border border-career-lightGray animate-fade-in">
       {/* gradient background overlay */}
-      
+
       <div className="relative z-10">
         {/* header */}
-        <h2 className="text-xl font-semibold text-center text-career-darkGreen mb-8">Login</h2>
+        <h2 className="text-xl font-semibold text-center text-career-darkGreen mb-8">
+          Login
+        </h2>
 
         {/* form */}
         <form className="space-y-2" onSubmit={handleSubmit}>
@@ -94,10 +96,7 @@ export default function Login({ changeMode }: AuthProp) {
 
           {/* button */}
           <div className="mt-6">
-            <Button
-              disabled={isLoading}
-              type="submit"
-            >
+            <Button disabled={isLoading} type="submit">
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />

@@ -1,12 +1,12 @@
-import React from 'react';
-import GroupItem from '../b-level/Group-item';
+import React from "react";
+import GroupItem from "../b-level/Group-item";
 
 type Group = {
   id: string;
   groupName: string;
   amount: number;
   date: string;
-  type: 'receivable' | 'payable';
+  type: "receivable" | "payable";
   groupIcon?: string;
 };
 
@@ -18,7 +18,7 @@ type GroupContainerProps = {
 
 const GroupContainer: React.FC<GroupContainerProps> = ({
   groups = [],
-  className = '',
+  className = "",
   showHeader = true,
 }) => {
   return (

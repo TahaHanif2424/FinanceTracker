@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface DetailItemProps {
   icon: React.ReactNode;
@@ -13,7 +13,9 @@ const DetailItem: React.FC<DetailItemProps> = ({ icon, label, value }) => {
         {icon}
       </div>
       <div className="flex-1">
-        <div className="text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">{label}</div>
+        <div className="text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">
+          {label}
+        </div>
         <div>{value}</div>
       </div>
     </div>

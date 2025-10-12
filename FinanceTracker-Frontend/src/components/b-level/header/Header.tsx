@@ -1,7 +1,7 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { User, ChevronDown } from 'lucide-react';
-import { useDataStore } from '../../../Store/DataStore';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { User, ChevronDown } from "lucide-react";
+import { useDataStore } from "../../../Store/DataStore";
 
 export default function Header() {
   const location = useLocation();
@@ -9,22 +9,22 @@ export default function Header() {
 
   const getPageName = () => {
     const path = location.pathname;
-    if (path === '/dashboard' || path === '/') {
-      return 'Dashboard';
+    if (path === "/dashboard" || path === "/") {
+      return "Dashboard";
     }
-    if (path === '/transactions') {
-      return 'Transactions';
+    if (path === "/transactions") {
+      return "Transactions";
     }
-    if (path === '/groups') {
-      return 'Groups';
+    if (path === "/groups") {
+      return "Groups";
     }
-    if (path === '/reports') {
-      return 'Reports';
+    if (path === "/reports") {
+      return "Reports";
     }
-    if (path === '/settings') {
-      return 'Settings';
+    if (path === "/settings") {
+      return "Settings";
     }
-    return 'Dashboard';
+    return "Dashboard";
   };
 
   return (
@@ -38,13 +38,14 @@ export default function Header() {
           />
 
           <div className="flex items-baseline gap-2 text-career-darkGreen">
-            <span className="text-3xl font-bold leading-none">Finance Tracker</span>
+            <span className="text-3xl font-bold leading-none">
+              Finance Tracker
+            </span>
             <span className="text-3xl font-bold leading-none">|</span>
             <span className="text-sm font-medium text-career-mediumGreen leading-none">
               {getPageName()}
             </span>
           </div>
-
         </div>
 
         <div className="flex items-center gap-3">
@@ -53,8 +54,12 @@ export default function Header() {
               <User className="w-5 h-5" />
             </div>
             <div className="text-sm">
-              <p className="font-semibold text-career-darkGreen">{name || 'User'}</p>
-              <p className="text-xs text-gray-600">{email || 'user@example.com'}</p>
+              <p className="font-semibold text-career-darkGreen">
+                {name || "User"}
+              </p>
+              <p className="text-xs text-gray-600">
+                {email || "user@example.com"}
+              </p>
             </div>
             <ChevronDown className="w-4 h-4 text-career-darkGreen" />
           </div>
